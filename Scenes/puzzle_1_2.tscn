@@ -1,0 +1,124 @@
+[gd_scene format=3 uid="uid://c0aun3yxkemsj"]
+
+[ext_resource type="Script" uid="uid://dh4psmyx8ok4p" path="res://Scripts/puzzle_1_2.gd" id="1_qpb2b"]
+[ext_resource type="Texture2D" uid="uid://coh4tyqrslvn" path="res://Assets/Sprites/puzzle_1_background_2.png" id="1_skh3y"]
+[ext_resource type="Texture2D" uid="uid://b6jffjg0js2v5" path="res://Assets/Sprites/puzzle_1_tree_1_bottom.png" id="2_qpb2b"]
+[ext_resource type="Texture2D" uid="uid://bow3gy32et5me" path="res://Assets/Sprites/puzzle_1_tree_1_top.png" id="3_r85py"]
+[ext_resource type="Script" uid="uid://bhwaii4jhingd" path="res://scripts/Connect_the_dots.gd" id="4_d62op"]
+[ext_resource type="Texture2D" uid="uid://dr6bwd5vaehqu" path="res://Assets/Sprites/puzzle_1_border.png" id="5_0txgb"]
+
+[sub_resource type="Animation" id="Animation_g7oda"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Tree_Bottom/Tree_top:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Tree_Bottom/Tree_top:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-345, -72)]
+}
+
+[sub_resource type="Animation" id="Animation_v5idu"]
+resource_name = "Tree_falling"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Tree_Bottom/Tree_top:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.43333334, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, -0.17570579, -1.6894787159305111]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Tree_Bottom/Tree_top:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.7, 0.8666667, 1.1, 1.2666667, 1.5333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-345, -72), Vector2(-343, -73), Vector2(-343, -74), Vector2(-342.00003, -69), Vector2(-463, 63.00003), Vector2(-527, 239), Vector2(-613, 344)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2eluj"]
+_data = {
+&"RESET": SubResource("Animation_g7oda"),
+&"Tree_falling": SubResource("Animation_v5idu")
+}
+
+[node name="Puzzle12" type="Node2D" unique_id=1652117332]
+script = ExtResource("1_qpb2b")
+
+[node name="Background" type="Sprite2D" parent="." unique_id=368748119]
+texture = ExtResource("1_skh3y")
+
+[node name="Tree_Bottom" type="Sprite2D" parent="." unique_id=1640389764]
+position = Vector2(0, 136)
+texture = ExtResource("2_qpb2b")
+
+[node name="Tree_top" type="Sprite2D" parent="Tree_Bottom" unique_id=2130741873]
+position = Vector2(-345, -72)
+texture = ExtResource("3_r85py")
+offset = Vector2(345, -218)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=541882111]
+libraries/ = SubResource("AnimationLibrary_2eluj")
+
+[node name="Puzzle" type="Node2D" parent="." unique_id=1963849210]
+z_index = 2
+position = Vector2(-257, -246)
+script = ExtResource("4_d62op")
+rows = 6
+collums = 6
+pointed_cells = Dictionary[int, Color]({
+0: Color(0.17254902, 0.4392157, 0.047058824, 1),
+1: Color(0.9555716, 0.9679889, 0, 1),
+2: Color(0.09019608, 0.23921569, 0.5058824, 1),
+5: Color(0.09019608, 0.23921569, 0.5058824, 1),
+11: Color(0.7425806, 0.3025851, 0.077873416, 1),
+15: Color(0.95686275, 0.96862745, 0, 1),
+17: Color(0.86658597, 0.07542644, 0.28182882, 1),
+18: Color(0.7411765, 0.3019608, 0.078431375, 1),
+21: Color(0.17254902, 0.4392157, 0.047058824, 1),
+24: Color(0.8666667, 0.07450981, 0.28235295, 1)
+})
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Puzzle" unique_id=1947774747]
+offset_left = -64.0
+offset_top = -61.0
+offset_right = 15.0
+offset_bottom = 19.0
+texture = ExtResource("5_0txgb")
+draw_center = false
+region_rect = Rect2(0, 0, 225, 225)
+patch_margin_left = 35
+patch_margin_top = 30
+patch_margin_right = 35
+patch_margin_bottom = 32
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+metadata/_edit_use_anchors_ = true
+
+[connection signal="puzzle_finished" from="Puzzle" to="." method="_on_puzzle_puzzle_finished"]

@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://cyw56yw73wyrl"]
+
+[ext_resource type="Script" uid="uid://ds1s5on1gud48" path="res://scripts/main.gd" id="1_jjgbg"]
+[ext_resource type="PackedScene" uid="uid://dk2s5ljradogu" path="res://Scenes/ui.tscn" id="2_8gbba"]
+[ext_resource type="PackedScene" uid="uid://bpls7vvgds0m4" path="res://Scenes/Room1.tscn" id="3_jjvhh"]
+[ext_resource type="PackedScene" uid="uid://bug7aoxxll8ej" path="res://Scenes/Room2.tscn" id="4_kry3j"]
+[ext_resource type="PackedScene" uid="uid://coouera7kt4sv" path="res://Scenes/Room4.tscn" id="5_21xkr"]
+[ext_resource type="PackedScene" uid="uid://7s8nosfcu7ix" path="res://Scenes/Room3.tscn" id="6_21xkr"]
+[ext_resource type="PackedScene" uid="uid://c8visyxg0onp2" path="res://Scenes/puzzle_1_1.tscn" id="7_6bp64"]
+[ext_resource type="PackedScene" uid="uid://c0aun3yxkemsj" path="res://Scenes/puzzle_1_2.tscn" id="8_344ge"]
+[ext_resource type="PackedScene" uid="uid://davu264vpfim1" path="res://Scenes/puzzle_2.tscn" id="9_ynf5e"]
+[ext_resource type="PackedScene" uid="uid://b0ip1ac6jxlmc" path="res://Scenes/Bird_cage.tscn" id="10_hptm8"]
+
+[node name="Main" type="Node2D" unique_id=795449945]
+script = ExtResource("1_jjgbg")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1381443270]
+
+[node name="Room1" parent="." unique_id=1797998801 instance=ExtResource("3_jjvhh")]
+
+[node name="Room2" parent="." unique_id=1077077483 instance=ExtResource("4_kry3j")]
+position = Vector2(1152, 0)
+
+[node name="Room4" parent="." unique_id=29335178 instance=ExtResource("5_21xkr")]
+position = Vector2(3456, 0)
+
+[node name="Room3" parent="." unique_id=252451813 instance=ExtResource("6_21xkr")]
+position = Vector2(2304, 0)
+
+[node name="UI" parent="." unique_id=1792674055 instance=ExtResource("2_8gbba")]
+
+[node name="Puzzle_1_1" parent="." unique_id=1910884353 instance=ExtResource("7_6bp64")]
+position = Vector2(-1500, -1278)
+
+[node name="Puzzle1_2" parent="." unique_id=1652117332 instance=ExtResource("8_344ge")]
+position = Vector2(-1500, 1184)
+
+[node name="Puzzle2" parent="." unique_id=453162003 instance=ExtResource("9_ynf5e")]
+position = Vector2(1662, 1170)
+
+[node name="BirdCage" parent="." unique_id=1857703332 instance=ExtResource("10_hptm8")]
+position = Vector2(1660, -1265)
+
+[connection signal="Open" from="Room2" to="." method="_on_room_2_open"]
+[connection signal="Open" from="Room4" to="." method="_on_room_4_open"]
+[connection signal="move" from="UI" to="." method="_on_ui_move"]
+[connection signal="open_menu" from="UI" to="." method="_on_ui_open_menu"]
+[connection signal="puzzle_1_1_finished" from="Puzzle_1_1" to="Room4" method="_on_puzzle_1_1_puzzle_1_1_finished"]
+[connection signal="puzzle_1_2_finished" from="Puzzle1_2" to="Room4" method="_on_puzzle_1_2_puzzle_1_2_finished"]
+[connection signal="seeds_planted" from="BirdCage" to="." method="_on_bird_cage_seeds_planted"]

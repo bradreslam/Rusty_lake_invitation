@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://jb6rr6fjx36b"]
+
+[ext_resource type="Script" uid="uid://cj7ymc81wqmij" path="res://scripts/connect_the_dots_cell.gd" id="1_f2wih"]
+[ext_resource type="Texture2D" uid="uid://encmjm8e0k" path="res://Assets/Sprites/puzzle_1_cell_1.png" id="2_f2wih"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_venku"]
+size = Vector2(92, 92)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_f2wih"]
+particle_flag_disable_z = true
+angle_min = -143.2
+angle_max = 78.60001
+direction = Vector3(0, -5, 0)
+spread = 5.625
+initial_velocity_min = 284.19
+initial_velocity_max = 284.19
+gravity = Vector3(0, 500, 0)
+
+[node name="ConnectTheDotsCell" type="Node2D" unique_id=1079239229]
+script = ExtResource("1_f2wih")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1738809950]
+z_index = -2
+texture = ExtResource("2_f2wih")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1262560471]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1234855359]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_venku")
+
+[node name="cell_particle" type="GPUParticles2D" parent="." unique_id=2090925675]
+emitting = false
+amount = 1
+texture = ExtResource("2_f2wih")
+lifetime = 3.24
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_f2wih")
+
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]

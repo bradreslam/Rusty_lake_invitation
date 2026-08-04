@@ -1,0 +1,427 @@
+[gd_scene format=3 uid="uid://b0ip1ac6jxlmc"]
+
+[ext_resource type="Script" uid="uid://vb7qbnt6t67c" path="res://scripts/bird_cage.gd" id="1_j0edo"]
+[ext_resource type="Texture2D" uid="uid://5nnaunxovt6g" path="res://Assets/Sprites/cage_background.png" id="2_keul8"]
+[ext_resource type="Texture2D" uid="uid://dctmbb7l31t40" path="res://Assets/Sprites/cage_front.png" id="3_cd3u2"]
+[ext_resource type="Texture2D" uid="uid://d0kyp2x8x575u" path="res://Assets/Sprites/cage_back.png" id="4_5hwvi"]
+[ext_resource type="Texture2D" uid="uid://qh31y05bkssf" path="res://Assets/Sprites/cage_seat.png" id="5_oc46u"]
+[ext_resource type="Texture2D" uid="uid://doe6rcieqlnjh" path="res://Assets/Sprites/cage_bowl.png" id="6_blxpv"]
+[ext_resource type="Texture2D" uid="uid://b2ix2xedavqey" path="res://Assets/Sprites/bird_seeds_pile.png" id="7_8gqxj"]
+[ext_resource type="Texture2D" uid="uid://rdysqss7oqre" path="res://Assets/Sprites/parrot_right_leg.png" id="8_2g43b"]
+[ext_resource type="Texture2D" uid="uid://c25nrmetvibc1" path="res://Assets/Sprites/seeds.png" id="8_3acdd"]
+[ext_resource type="Texture2D" uid="uid://eb2dcrbnro2" path="res://Assets/Sprites/parrot_left_leg.png" id="9_3acdd"]
+[ext_resource type="Texture2D" uid="uid://gyuh4b5br8w2" path="res://Assets/Sprites/black_egg.png" id="9_pgh0q"]
+[ext_resource type="Texture2D" uid="uid://vuvc3si8tfud" path="res://Assets/Sprites/parrot_body.png" id="10_pgh0q"]
+[ext_resource type="Texture2D" uid="uid://bu2puscetoyoy" path="res://Assets/Sprites/parrot_wing.png" id="11_cfwpl"]
+[ext_resource type="Texture2D" uid="uid://dyjgkmml4ov4s" path="res://Assets/Sprites/parrot_upper_beak.png" id="12_qvny2"]
+[ext_resource type="Texture2D" uid="uid://cm7almvhddlgc" path="res://Assets/Sprites/parrot_lower_beak.png" id="13_tdsl2"]
+[ext_resource type="Texture2D" uid="uid://cbacth2xiqs4a" path="res://Assets/Sprites/parrot_back_feathers.png" id="14_hhmhe"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2g43b"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3acdd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pgh0q"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cfwpl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qvny2"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_3acdd"]
+particles_animation = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 2
+particles_anim_loop = false
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2g43b"]
+atlas = ExtResource("8_3acdd")
+region = Rect2(0, -1, 29, 53)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3acdd"]
+particle_flag_disable_z = true
+angle_min = -154.29999
+angle_max = 118.30001
+direction = Vector3(0, -1, 0)
+initial_velocity_min = 35.71
+initial_velocity_max = 60.71
+gravity = Vector3(0, 140, 0)
+anim_offset_max = 1.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tdsl2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hhmhe"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qgotq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jqqny"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5hk2s"]
+
+[sub_resource type="Animation" id="Animation_lbi6r"]
+resource_name = "Harvey_eat"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Harvey/Body:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6, 0.9, 1.2, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.6614797865058505, 0.5881759579220889, 0.6614797865058505, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Harvey/Body/Back_feathers:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, -0.5148721293383273, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Harvey/Body/Upper_beak:rotation")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.2, 0.43333334, 0.73333335, 1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.5881759579220889, 0.0, -0.5881759579220889, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Harvey/Body/Lower_beak:rotation")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.23333333, 0.46666667, 0.7, 1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.14660765716752328, 0.0, 0.14660765716752328, 0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Cage_bowl/GPUParticles2D:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.6666667, 0.93333334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Cage_bowl/GPUParticles2D2:emitting")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(1.1666666, 1.4333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(1.1666666),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"change_seeds"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_x7bql"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Harvey/Body:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Harvey/Body/Wing:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Harvey/Body/Lower_beak:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Harvey/Body/Upper_beak:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Harvey/Body/Back_feathers:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Cage_bowl/GPUParticles2D:emitting")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Cage_bowl/GPUParticles2D2:emitting")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_nsy2p"]
+resource_name = "harvey_flap"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Harvey/Body:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.1666666, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.14660765716752328, -0.14660765716752328, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Harvey/Body/Wing:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2, 0.5, 0.8333333, 1.1666666, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.5148721293383273, -0.212930168743308, 0.5619960191421739, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Harvey/Body/Lower_beak:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.26666668, 0.6333333, 1.0333333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.4415683007545656, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Harvey/Body/Upper_beak:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.2, 0.6666667, 1.0333333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, -0.36826447217080394, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n17lf"]
+_data = {
+&"Harvey_eat": SubResource("Animation_lbi6r"),
+&"RESET": SubResource("Animation_x7bql"),
+&"harvey_flap": SubResource("Animation_nsy2p")
+}
+
+[node name="BirdCage" type="Node2D" unique_id=1857703332]
+script = ExtResource("1_j0edo")
+
+[node name="Background" type="Sprite2D" parent="." unique_id=1640025898]
+z_index = -4
+texture = ExtResource("2_keul8")
+
+[node name="Cage_front" type="Sprite2D" parent="." unique_id=259087647]
+z_index = 3
+texture = ExtResource("3_cd3u2")
+
+[node name="Cage_back" type="Sprite2D" parent="." unique_id=279413691]
+z_index = -3
+texture = ExtResource("4_5hwvi")
+
+[node name="Cage_seat" type="Sprite2D" parent="." unique_id=267916307]
+z_index = -2
+position = Vector2(-67, 155)
+texture = ExtResource("5_oc46u")
+
+[node name="Cage_bowl" type="Sprite2D" parent="." unique_id=1352368336]
+z_index = -2
+position = Vector2(142, 161)
+texture = ExtResource("6_blxpv")
+
+[node name="Button" type="Button" parent="Cage_bowl" unique_id=2085536108]
+offset_left = -50.0
+offset_top = -122.0
+offset_right = 45.0
+offset_bottom = -19.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_2g43b")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_3acdd")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_pgh0q")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_cfwpl")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_qvny2")
+
+[node name="Seeds" type="Sprite2D" parent="Cage_bowl" unique_id=336815932]
+modulate = Color(1, 1, 1, 0)
+z_index = 1
+position = Vector2(-3, -84)
+rotation = -0.3543677
+texture = ExtResource("7_8gqxj")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Cage_bowl" unique_id=2143273979]
+z_index = 2
+material = SubResource("CanvasItemMaterial_3acdd")
+position = Vector2(0, -87)
+emitting = false
+amount = 3
+texture = SubResource("AtlasTexture_2g43b")
+lifetime = 1.6
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_3acdd")
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="Cage_bowl" unique_id=1492343736]
+z_index = 2
+material = SubResource("CanvasItemMaterial_3acdd")
+position = Vector2(0, -87)
+emitting = false
+amount = 3
+texture = SubResource("AtlasTexture_2g43b")
+lifetime = 1.6
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_3acdd")
+
+[node name="Egg" type="Sprite2D" parent="Cage_bowl" unique_id=103886773]
+visible = false
+position = Vector2(1, -69)
+texture = ExtResource("9_pgh0q")
+
+[node name="Harvey" type="Node2D" parent="." unique_id=1829272545]
+visible = false
+position = Vector2(-123, 80)
+
+[node name="Right_leg" type="Sprite2D" parent="Harvey" unique_id=420374699]
+position = Vector2(23, 9)
+texture = ExtResource("8_2g43b")
+offset = Vector2(17, 23)
+
+[node name="Left_leg" type="Sprite2D" parent="Harvey" unique_id=775419034]
+z_index = -1
+position = Vector2(56, 22)
+texture = ExtResource("9_3acdd")
+
+[node name="Body" type="Sprite2D" parent="Harvey" unique_id=337328668]
+z_index = -1
+position = Vector2(29, 5)
+texture = ExtResource("10_pgh0q")
+offset = Vector2(29, -76)
+
+[node name="Wing" type="Sprite2D" parent="Harvey/Body" unique_id=644103975]
+position = Vector2(44, -121)
+texture = ExtResource("11_cfwpl")
+offset = Vector2(-43, 51)
+
+[node name="Upper_beak" type="Sprite2D" parent="Harvey/Body" unique_id=1261024792]
+position = Vector2(168, -169)
+texture = ExtResource("12_qvny2")
+offset = Vector2(5.5, 13.5)
+
+[node name="Lower_beak" type="Sprite2D" parent="Harvey/Body" unique_id=1724325585]
+position = Vector2(158.00908, -160.35646)
+texture = ExtResource("13_tdsl2")
+offset = Vector2(6.2517776, 7.943283)
+
+[node name="Back_feathers" type="Sprite2D" parent="Harvey/Body" unique_id=1133961881]
+z_index = -2
+position = Vector2(-66.82681, 11.041229)
+texture = ExtResource("14_hhmhe")
+offset = Vector2(-20.173187, 60.95877)
+
+[node name="Harvey_button" type="Button" parent="Harvey" unique_id=732734107]
+offset_left = 170.7778
+offset_top = -262.74252
+offset_right = 327.9754
+offset_bottom = 106.70932
+rotation = 0.8704914
+theme_override_styles/normal = SubResource("StyleBoxEmpty_tdsl2")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_hhmhe")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_qgotq")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_jqqny")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_5hk2s")
+disabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=653173100]
+libraries/ = SubResource("AnimationLibrary_n17lf")
+
+[connection signal="pressed" from="Cage_bowl/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Harvey/Harvey_button" to="." method="_on_harvey_button_pressed"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

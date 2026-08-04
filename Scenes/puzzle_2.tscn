@@ -1,0 +1,87 @@
+[gd_scene format=3 uid="uid://davu264vpfim1"]
+
+[ext_resource type="Script" uid="uid://dfn2pwkvmvsum" path="res://scripts/puzzle_2.gd" id="1_qwl0q"]
+[ext_resource type="Texture2D" uid="uid://bnw7e4wrlqmb7" path="res://Assets/Sprites/Go_board.png" id="2_1lgd8"]
+[ext_resource type="Texture2D" uid="uid://leq0nqih6c62" path="res://Assets/Sprites/puzzle_2_background.png" id="3_s5ihh"]
+[ext_resource type="Texture2D" uid="uid://dp7c2uh2q2qie" path="res://Assets/Sprites/puzzle_2_rules.png" id="4_wafl1"]
+[ext_resource type="Texture2D" uid="uid://b2ix2xedavqey" path="res://Assets/Sprites/bird_seeds_pile.png" id="5_wafl1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cu4id"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mk84a"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tjxg2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kkg01"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e8k6r"]
+
+[node name="Puzzle2" type="Node2D" unique_id=453162003]
+script = ExtResource("1_qwl0q")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1348661156]
+position = Vector2(11, -12)
+texture = ExtResource("2_1lgd8")
+
+[node name="GridContainer" type="GridContainer" parent="Sprite2D" unique_id=433116885]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -287.5
+offset_top = -287.5
+offset_right = -287.5
+offset_bottom = -287.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 19
+
+[node name="Background" type="Sprite2D" parent="." unique_id=542042012]
+z_index = -5
+texture = ExtResource("3_s5ihh")
+
+[node name="Rules" type="Sprite2D" parent="." unique_id=162895042]
+position = Vector2(-404, 124)
+texture = ExtResource("4_wafl1")
+
+[node name="Rules_text" type="RichTextLabel" parent="Rules" unique_id=393594611]
+offset_left = -87.0
+offset_top = -148.0
+offset_right = 86.0
+offset_bottom = 145.0
+theme_override_font_sizes/normal_font_size = 13
+bbcode_enabled = true
+text = "[b]Rules: Gobang[/b]
+1. Every turn you place one piece on the board.
+
+2. If two pieces of the same color are surounded on both ends by a different color, these pieces are captured and removed from the board.
+
+3.  You win when you get five in a row.
+
+4. Rows are both diagonal and straight."
+
+[node name="Button" type="Button" parent="." unique_id=1151398682]
+offset_left = -32.0
+offset_top = -26.0
+offset_right = 32.0
+offset_bottom = 34.0
+pivot_offset = Vector2(5, 6)
+mouse_filter = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_cu4id")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_mk84a")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_tjxg2")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_kkg01")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_e8k6r")
+disabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Button" unique_id=732950315]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(9, 6)
+texture = ExtResource("5_wafl1")
+
+[node name="Timer" type="Timer" parent="." unique_id=1966148097]
+one_shot = true
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

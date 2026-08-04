@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://bug7aoxxll8ej"]
+
+[ext_resource type="Script" uid="uid://dimqxxbb5n1b4" path="res://Scripts/room_2.gd" id="1_7v5bi"]
+[ext_resource type="Texture2D" uid="uid://n8hsa65otv84" path="res://Assets/Sprites/room2_background.png" id="1_ifjk4"]
+[ext_resource type="Texture2D" uid="uid://cfyrh71bn84ea" path="res://Assets/Sprites/room2_birdcage.png" id="2_tt61t"]
+[ext_resource type="Texture2D" uid="uid://drae5dx3rmj3n" path="res://Assets/Sprites/room2_puzzle.png" id="3_7v5bi"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_erksf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u5puh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bbr00"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8ll4g"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mdbp1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_we5c8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gv0tw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iqqoj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rx63n"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vpp8u"]
+
+[node name="Room2" type="Node2D" unique_id=1077077483]
+script = ExtResource("1_7v5bi")
+
+[node name="Background" type="Sprite2D" parent="." unique_id=2016631566]
+texture = ExtResource("1_ifjk4")
+
+[node name="Bird_cage" type="Sprite2D" parent="." unique_id=591851912]
+position = Vector2(-292, -24)
+texture = ExtResource("2_tt61t")
+
+[node name="Bird_cage_button" type="Button" parent="Bird_cage" unique_id=706208125]
+offset_left = -52.0
+offset_top = -192.0
+offset_right = 53.0
+offset_bottom = 14.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_erksf")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_u5puh")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_bbr00")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_8ll4g")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_mdbp1")
+
+[node name="Puzzle_2" type="Sprite2D" parent="." unique_id=341563802]
+position = Vector2(6, 144)
+texture = ExtResource("3_7v5bi")
+
+[node name="Puzzle_2_button" type="Button" parent="Puzzle_2" unique_id=2126301311]
+offset_left = -112.0
+offset_top = -59.0
+offset_right = 110.0
+offset_bottom = 57.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_we5c8")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_gv0tw")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_iqqoj")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_rx63n")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_vpp8u")
+
+[connection signal="pressed" from="Bird_cage/Bird_cage_button" to="." method="_on_bird_cage_button_pressed"]
+[connection signal="pressed" from="Puzzle_2/Puzzle_2_button" to="." method="_on_puzzle_2_button_pressed"]

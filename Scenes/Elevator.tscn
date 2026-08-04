@@ -1,0 +1,124 @@
+[gd_scene format=3 uid="uid://b5g1sadeaejxn"]
+
+[ext_resource type="Texture2D" uid="uid://yngga4mvgmfo" path="res://Assets/Sprites/elevator_inside_background.png" id="1_dmimb"]
+[ext_resource type="Texture2D" uid="uid://biiq71b6jc3ug" path="res://Assets/Sprites/elevator_inside_door.png" id="2_xv5vg"]
+[ext_resource type="Texture2D" uid="uid://clx5ftfdygr17" path="res://Assets/Sprites/elevator_inside_foreground.png" id="3_3geoe"]
+
+[sub_resource type="Animation" id="Animation_57077"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("door:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [-490.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("background:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [99.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ColorRect:color:a")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_rd3yl"]
+resource_name = "down"
+length = 9.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("door:position:x")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(3, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-490.0, -125.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("background:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(5.7, 8.166666),
+"transitions": PackedFloat32Array(2.297394, 1),
+"update": 0,
+"values": [99.0, -555.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ColorRect:color:a")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(7.4666667, 9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r4wj7"]
+_data = {
+&"RESET": SubResource("Animation_57077"),
+&"down": SubResource("Animation_rd3yl")
+}
+
+[node name="Elevator" type="Node2D" unique_id=1520086]
+
+[node name="background" type="Sprite2D" parent="." unique_id=1797141945]
+position = Vector2(-126, 99)
+texture = ExtResource("1_dmimb")
+
+[node name="ColorRect" type="ColorRect" parent="background" unique_id=1854385389]
+offset_left = -165.0
+offset_top = 360.0
+offset_right = 165.0
+offset_bottom = 606.0
+color = Color(0, 0, 0, 1)
+
+[node name="door" type="Sprite2D" parent="." unique_id=1138476361]
+position = Vector2(-490, 30)
+texture = ExtResource("2_xv5vg")
+
+[node name="foreground" type="Sprite2D" parent="." unique_id=477757620]
+texture = ExtResource("3_3geoe")
+
+[node name="Timer" type="Timer" parent="." unique_id=1447182853]
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=613238770]
+z_index = 10
+offset_left = -576.0
+offset_top = -323.0
+offset_right = 575.0
+offset_bottom = 324.0
+color = Color(0, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=148524189]
+libraries/ = SubResource("AnimationLibrary_r4wj7")
+autoplay = &"down"

@@ -1,0 +1,205 @@
+[gd_scene format=3 uid="uid://dt6g7nel55k1i"]
+
+[ext_resource type="Script" uid="uid://it172y64322o" path="res://scripts/settings.gd" id="1_4geyq"]
+[ext_resource type="Texture2D" uid="uid://bi032io8wgjro" path="res://Assets/Sprites/wallpaper.png" id="2_i44u3"]
+
+[sub_resource type="Gradient" id="Gradient_i44u3"]
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0.3764706)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_lhmql"]
+gradient = SubResource("Gradient_i44u3")
+fill = 2
+fill_from = Vector2(0.48265895, 0.5086705)
+
+[node name="Settings" type="CanvasLayer" unique_id=703478384]
+process_mode = 2
+script = ExtResource("1_4geyq")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1603620802]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_i44u3")
+stretch_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="TextureRect" unique_id=1909890608]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_lhmql")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=194680186]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -164.5
+offset_top = -118.0
+offset_right = 164.5
+offset_bottom = 118.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="Settings" type="Button" parent="VBoxContainer" unique_id=168832467]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Settings"
+
+[node name="Return" type="Button" parent="VBoxContainer" unique_id=462211565]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Return to game
+"
+
+[node name="Reset" type="Button" parent="VBoxContainer" unique_id=1772144149]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Reset game"
+
+[node name="Quit" type="Button" parent="VBoxContainer" unique_id=1308484257]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Quit game"
+
+[node name="Check" type="TextureRect" parent="." unique_id=850354982]
+visible = false
+z_index = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_i44u3")
+stretch_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Check" unique_id=1237216807]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -134.0
+offset_top = -66.0
+offset_right = 134.0
+offset_bottom = 66.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Check/VBoxContainer" unique_id=1905952989]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Are you sure?
+Progres will be lost."
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Check/VBoxContainer" unique_id=801945029]
+layout_mode = 2
+theme_override_constants/separation = 100
+alignment = 1
+
+[node name="Yes" type="Button" parent="Check/VBoxContainer/HBoxContainer" unique_id=1495894027]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Yes"
+
+[node name="No" type="Button" parent="Check/VBoxContainer/HBoxContainer" unique_id=1930983865]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "No"
+
+[node name="TextureRect" type="TextureRect" parent="Check" unique_id=1968432860]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_lhmql")
+
+[node name="Settings" type="TextureRect" parent="." unique_id=23954578]
+visible = false
+z_index = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_i44u3")
+stretch_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings" unique_id=1600562907]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Settings/VBoxContainer" unique_id=1616560394]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Settings/VBoxContainer/HBoxContainer2" unique_id=1165568334]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Window:"
+
+[node name="Window_mode" type="Button" parent="Settings/VBoxContainer/HBoxContainer2" unique_id=505349317]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "fullscreen"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Settings/VBoxContainer" unique_id=751541405]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Settings/VBoxContainer/HBoxContainer" unique_id=1862552059]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Sound:"
+
+[node name="Volume" type="HSlider" parent="Settings/VBoxContainer/HBoxContainer" unique_id=1855048852]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+value = 100.0
+
+[node name="Close_settings" type="Button" parent="Settings/VBoxContainer" unique_id=432565529]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Close settings"
+
+[node name="TextureRect" type="TextureRect" parent="Settings" unique_id=1374783170]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_lhmql")
+
+[connection signal="pressed" from="VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="VBoxContainer/Return" to="." method="_on_return_pressed"]
+[connection signal="pressed" from="VBoxContainer/Reset" to="." method="_on_reset_pressed"]
+[connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="Check/VBoxContainer/HBoxContainer/Yes" to="." method="_on_yes_pressed"]
+[connection signal="pressed" from="Check/VBoxContainer/HBoxContainer/No" to="." method="_on_no_pressed"]
+[connection signal="pressed" from="Settings/VBoxContainer/HBoxContainer2/Window_mode" to="." method="_on_window_mode_pressed"]
+[connection signal="value_changed" from="Settings/VBoxContainer/HBoxContainer/Volume" to="." method="_on_volume_value_changed"]
+[connection signal="pressed" from="Settings/VBoxContainer/Close_settings" to="." method="_on_close_settings_pressed"]

@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://dv7twig5if7pd"]
+
+[ext_resource type="Script" uid="uid://yrwti7wqo7a0" path="res://scripts/go_button.gd" id="1_88da2"]
+[ext_resource type="Texture2D" uid="uid://c25nrmetvibc1" path="res://Assets/Sprites/seeds.png" id="2_n47t4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4f15b"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_88da2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n47t4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wf5ei"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_chqx4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wf5ei"]
+atlas = ExtResource("2_n47t4")
+region = Rect2(15, 24, 14, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_chqx4"]
+atlas = ExtResource("2_n47t4")
+region = Rect2(0, 24, 15, 28)
+
+[node name="GoButton" type="Button" unique_id=1035645128]
+custom_minimum_size = Vector2(31, 31)
+offset_right = 30.0
+offset_bottom = 30.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_4f15b")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_88da2")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_n47t4")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_wf5ei")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_chqx4")
+script = ExtResource("1_88da2")
+white = SubResource("AtlasTexture_wf5ei")
+black = SubResource("AtlasTexture_chqx4")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=2006125144]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -22.0
+offset_bottom = -22.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(15, 15)
+mouse_filter = 2
+stretch_mode = 3
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

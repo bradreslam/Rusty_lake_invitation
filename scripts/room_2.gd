@@ -1,6 +1,7 @@
 extends Node2D
 
 @onready var cage = $Bird_cage
+@onready var audio = $Parrot_player
 
 var seeds_in_cage = false
 
@@ -14,5 +15,6 @@ func _on_puzzle_2_button_pressed():
 	Open.emit(Vector2(1662.0,1170.0))
 
 func enable_parrot():
+	audio.play()
 	var cage_with_harvey = load("res://Assets/Sprites/birdcage_with_harvey.png")
 	cage.texture = cage_with_harvey

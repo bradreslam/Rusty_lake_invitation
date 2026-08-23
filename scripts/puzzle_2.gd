@@ -180,6 +180,8 @@ func check_line(id:Vector2): #Checks if a line is created or changed
 	var directions_to_check = [Vector2(0,1),Vector2(-1,1),Vector2(-1,0),Vector2(-1,-1)
 	,Vector2(0,-1),Vector2(1,-1),Vector2(1,0),Vector2(1,1)]
 	var new_lines = []
+	var lines_to_remove = []
+	var lines_to_add = []
 	for dir in directions_to_check:
 		if buttons.get(id+dir, button.instantiate()).color != 0:
 			var line = Line_data.new()
@@ -190,6 +192,7 @@ func check_line(id:Vector2): #Checks if a line is created or changed
 						new_lines.erase(l)
 						line = l
 						line.colors.reverse()
+						break
 			line.direction = dir
 			var i = 1
 			while check_if_id_on_board(id+dir*i) && buttons[id+dir*i].color != 0:
@@ -207,24 +210,26 @@ func check_line(id:Vector2): #Checks if a line is created or changed
 	
 	for l in new_lines: #check if new lines intersect with existing lines
 		for line in lines:
-			if line.direction == l.direction || line.direction == l.direction * Vector2(-1,-1) || line.direction == Vector2(1,1):
+			if line.direction == l.direction || line.direction == l.direction * Vector2(-1,-1) || line.direction == Vector2(0,0):
 				if line.colors.has(l.colors[0]) || line.colors.has(l.colors.back()):
-					lines.erase(line)
+					lines_to_remove.append(line)
 				else:
 					check_for_broken_winning_lines(l,line)
+		for line in lines_to_remove:
+			lines.erase(line)
+		lines_to_remove.clear()
 	
-	if buttons[id].color != null: #checks if the game is won, or if stones are captured
-		for l in new_lines:
+	for l in new_lines:#checks if the game is won, or if stones are captured
+		if !lines_to_remove.has(l):
 			if l.colors.size() > 3:
 				var hit = compare_arrays(l.colors,[1,2,2,1])
 				if hit == null:
 					hit = compare_arrays(l.colors,[2,1,1,2])
 				if hit != null:
-					new_lines.erase(l)
+					lines_to_remove.append(l)
 					l.colors[hit+1].release()
 					l.colors[hit+2].release()
 					var lines_to_check = []
-					var lines_to_remove = []
 					
 					for line in lines:
 						if line.colors.any(func(col): return col.color == 0):
@@ -234,35 +239,34 @@ func check_line(id:Vector2): #Checks if a line is created or changed
 						lines.erase(line)
 					
 					for line in new_lines:
-						if line.colors.any(func(col): return col.color == 0):
-							lines_to_check.append(line)
-							lines_to_remove.append(line)
+						if line != l:
+							if line.colors.any(func(col): return col.color == 0):
+								lines_to_check.append(line)
+								lines_to_remove.append(line)
 					
-					for line in lines_to_remove:
-						new_lines.erase(line)
-					
-					for line in lines_to_check: # checks if an already existing line contains on of the hit stones
+					for line in lines_to_check: # checks if an already existing line contains one of the hit stones
 						var new_line = Line_data.new()
 						while line.colors[0].color != 0:
 							new_line.colors.append(line.colors[0])
 							line.colors.pop_front()
 						line.colors.pop_front()
 						if new_line.colors.size() == 1:
-							if !check_if_lines_contain_button(lines, new_line.colors[0]) && !check_if_lines_contain_button(new_lines, new_line.colors[0]):
-								new_lines.append(new_line)
+							if !check_surounding_cells(new_line.colors[0].Id):
+								lines_to_add.append(new_line)
 						elif new_line.colors.size() != 0:
-							new_lines.append(new_line)
+							new_line.direction = line.direction
+							lines_to_add.append(new_line)
 						if line.colors.size() == 1:
-							if !check_if_lines_contain_button(lines, line.colors[0]) && !check_if_lines_contain_button(new_lines, line.colors[0]):
-								new_lines.append(line)
+							if !check_surounding_cells(line.colors[0].Id):
+								lines_to_add.append(line)
 						elif line.colors.size() != 0:
-							new_lines.append(line)
+							lines_to_add.append(line)
 					
 					
 					var new_line_1 = Line_data.new()
 					if hit == 0:
-						new_line_1.direction = Vector2(1,1)
-						new_line_1.colors.append(l.colors[0])
+						if check_surounding_cells(l.colors[0].Id):
+							new_line_1.colors.append(l.colors[0])
 					else:
 						var i = 0
 						new_line_1.direction = l.direction
@@ -270,26 +274,19 @@ func check_line(id:Vector2): #Checks if a line is created or changed
 							new_line_1.colors.append(l.colors[i])
 							i += 1
 					var new_line_2 = Line_data.new()
-					if hit == l.colors.size()-4:#Changed from 1 to 4
-						new_line_2.direction = Vector2(1,1)
-						new_line_2.colors.append(l.colors.back())
+					if hit == l.colors.size()-4:
+						if check_surounding_cells(l.colors.back().Id):
+							new_line_2.colors.append(l.colors.back())
 					else:
 						var i = hit+3
 						new_line_2.direction = l.direction
 						while i < l.colors.size():
 							new_line_2.colors.append(l.colors[i])
 							i += 1
-					if new_line_1.colors.size() == 1:
-						if !check_if_lines_contain_button(lines, new_line_1.colors[0]):
-							new_lines.append(new_line_1)
-					else:
-						new_lines.append(new_line_1)
-					if new_line_2.colors.size() == 1:
-						if !check_if_lines_contain_button(lines, new_line_2.colors[0]):
-							new_lines.append(new_line_2)
-					else:
-						new_lines.append(new_line_2)
-					break
+					if new_line_1.colors.size() != 0:
+						lines_to_add.append(new_line_1)
+					if new_line_2.colors.size() != 0:
+						lines_to_add.append(new_line_2)
 					
 				elif l.colors.size() > 4:
 					if compare_arrays(l.colors,[1,1,1,1,1]) != null:
@@ -300,6 +297,12 @@ func check_line(id:Vector2): #Checks if a line is created or changed
 						reset_game()
 						return
 	
+	for line in lines_to_remove:
+		new_lines.erase(line)
+	
+	for line in lines_to_add:
+		new_lines.append(line)
+	
 	for line in new_lines:
 		line.set_formation()
 	
@@ -309,6 +312,14 @@ func check_line(id:Vector2): #Checks if a line is created or changed
 func check_if_lines_contain_button(lines_to_check,butt):
 	for line in lines_to_check:
 		if line.colors.has(butt):
+			return true
+	return false
+
+func check_surounding_cells(id):
+	var directions = [Vector2(1,1),Vector2(1,0),Vector2(1,-1),Vector2(0,1),
+	Vector2(0,-1),Vector2(-1,1),Vector2(-1,0),Vector2(-1,-1)]
+	for dir in directions:
+		if buttons[id+dir].color != 0:
 			return true
 	return false
 

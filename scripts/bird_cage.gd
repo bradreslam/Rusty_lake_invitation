@@ -15,9 +15,9 @@ signal seeds_planted
 var seeds_alt_1 = load("res://Assets/Sprites/bird_seeds_pile_half.png")
 
 func _on_button_pressed():
-	var tween = create_tween()
 	var UI = get_parent().find_child("UI")
 	if egg_exposed:
+		var tween = create_tween()
 		tween.tween_property(egg,"position:y",-140,1.5)
 		tween.tween_property(egg,"modulate:a",0,0.5)
 		await tween.finished
@@ -27,6 +27,7 @@ func _on_button_pressed():
 	
 	var seeds = load("res://Assets/Sprites/bird_seeds_pile.png")
 	if UI.held_item == seeds:
+		var tween = create_tween()
 		seeds_planted.emit()
 		UI.remove_item(seeds)
 		tween.parallel().tween_property(seeds_texture,"position:y",-66,0.5)
@@ -38,7 +39,7 @@ func _on_button_pressed():
 func _on_harvey_button_pressed():
 	if !moving:
 		moving = true
-		if egg_exposed:
+		if egg_exposed && seeds_texture.visible == false:
 			animation.play("harvey_flap")
 		else:
 			animation.play("Harvey_eat")
@@ -46,6 +47,8 @@ func _on_harvey_button_pressed():
 func _on_animation_player_animation_finished(anim_name):
 	moving = false
 	if anim_name == "Harvey_eat":
+		if egg_exposed == true:
+			seeds_texture.visible = false
 		egg_exposed = true
 
 func change_seeds():

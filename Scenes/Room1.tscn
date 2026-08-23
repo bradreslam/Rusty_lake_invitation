@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://onyxnh5u0f6d" path="res://Assets/Sprites/water_outline_back.png" id="5_pt40w"]
 [ext_resource type="Texture2D" uid="uid://dcsqdnv360sc7" path="res://Assets/Sprites/blood_drop.png" id="8_4uh16"]
 [ext_resource type="Texture2D" uid="uid://gyuh4b5br8w2" path="res://Assets/Sprites/black_egg.png" id="8_xqepp"]
-[ext_resource type="Texture2D" uid="uid://dn3d4xdomvgb0" path="res://Assets/Sprites/water_splash.png" id="9_pt40w"]
+[ext_resource type="Texture2D" uid="uid://0ea508t6cxa6" path="res://Assets/Sprites/water_drop.png" id="9_huy5m"]
 [ext_resource type="Texture2D" uid="uid://doau1e45j6ftf" path="res://Assets/Sprites/blood_splat.png" id="9_ucp0a"]
 [ext_resource type="Texture2D" uid="uid://dqo0tg83feha1" path="res://Assets/Sprites/elevator_beam.png" id="10_3w57h"]
 [ext_resource type="Texture2D" uid="uid://bxu4mk1xx2hkt" path="res://Assets/Sprites/elevator_front.png" id="11_olvpm"]
@@ -28,12 +28,12 @@ gradient = SubResource("Gradient_ucp0a")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_o7l06"]
 particle_flag_disable_z = true
-gravity = Vector3(-40, 0, 0)
+gravity = Vector3(-70, 0, 0)
 color_ramp = SubResource("GradientTexture1D_3pgjm")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mp7kg"]
 particle_flag_disable_z = true
-gravity = Vector3(40, 0, 0)
+gravity = Vector3(70, 0, 0)
 color_ramp = SubResource("GradientTexture1D_3pgjm")
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_j3utp"]
@@ -451,7 +451,7 @@ length = 1.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Egg_drop/Sprite2D:position:y")
+tracks/0/path = NodePath("Egg_drop/Container/Sprite2D:position:y")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -463,38 +463,28 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Egg_drop/Water_splash:modulate:a")
+tracks/1/path = NodePath("Egg_drop/Container/Sprite2D:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.5, 0.6333333, 1.2, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [0.0, 1.0, 1.0, 0.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Egg_drop/Water_splash:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.5, 0.6666667, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(1.8055556, 2.1956525), Vector2(2.2, 0.8)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Egg_drop/Sprite2D:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Egg_drop/Water_splash")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"", 1.0, false],
+"method": &"play"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_a7g50"]
@@ -515,19 +505,19 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Elevator/Sprite2D/Body:position:y")
+tracks/1/path = NodePath("Elevator/Sprite2D3/Body:position:y")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(8.200001, 11.033333),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [464.0, 0.0]
+"values": [469.0, 4.0]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Elevator/Sprite2D/Body/Cog1:rotation")
+tracks/2/path = NodePath("Elevator/Sprite2D/Inside/Cog1:rotation")
 tracks/2/interp = 2
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -539,7 +529,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Elevator/Sprite2D/Body/Cog2:rotation")
+tracks/3/path = NodePath("Elevator/Sprite2D/Inside/Cog2:rotation")
 tracks/3/interp = 2
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -551,35 +541,35 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Elevator/Sprite2D/Body/Door:position:x")
+tracks/4/path = NodePath("Statue/Sprite2D2/Sprite2D:position:y")
 tracks/4/interp = 2
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(11.466667, 13),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [-1.0, 122.0]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Statue/Sprite2D2/Sprite2D:position:y")
-tracks/5/interp = 2
-tracks/5/loop_wrap = true
-tracks/5/keys = {
 "times": PackedFloat32Array(0, 5.1666665),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [3.094, 128.094]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Statue/Left_outline/GPUParticles2D:emitting")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 4.8333335, 6, 11.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false]
+}
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Statue/Left_outline/GPUParticles2D:emitting")
+tracks/6/path = NodePath("Statue/Right_outline/GPUParticles2D:emitting")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0, 4.8333335, 6, 11.2),
+"times": PackedFloat32Array(0, 4.866667, 6.0333333, 11.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [true, false, true, false]
@@ -587,45 +577,43 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("Statue/Right_outline/GPUParticles2D:emitting")
+tracks/7/path = NodePath("Elevator/Sprite2D/Inside/Enter_elevator:disabled")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(0, 4.866667, 6.0333333, 11.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [true, false, true, false]
-}
-tracks/8/type = "method"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath(".")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"times": PackedFloat32Array(11.233334),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"remove_inside_from_elevator"
-}]
-}
-tracks/9/type = "value"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("Elevator/Sprite2D/Body/Inside/Enter_elevator:disabled")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
 "times": PackedFloat32Array(13),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
 }
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Statue/Left_outline:modulate:a")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(4.5333333, 4.866667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Statue/Right_outline:modulate:a")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(4.5333333, 4.866667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("Statue/Left_outline:modulate:a")
+tracks/10/path = NodePath("Statue/Line2D:modulate:a")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -637,31 +625,31 @@ tracks/10/keys = {
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("Statue/Right_outline:modulate:a")
+tracks/11/path = NodePath("Elevator/Water_outline:self_modulate:a")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
-"times": PackedFloat32Array(4.5333333, 4.866667),
+"times": PackedFloat32Array(5.9333334, 6.133333),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [1.0, 0.0]
+"values": [0.0, 1.0]
 }
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("Statue/Line2D:modulate:a")
+tracks/12/path = NodePath("Elevator/Water_outline:scale:x")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
-"times": PackedFloat32Array(4.5333333, 4.866667),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(5.9666667, 6.266667, 6.766667, 8.2, 8.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [1.0, 0.0]
+"values": [0.0, 2.0, 1.2, 1.2, 6.2]
 }
 tracks/13/type = "value"
 tracks/13/imported = false
 tracks/13/enabled = true
-tracks/13/path = NodePath("Elevator/Water_outline:self_modulate:a")
+tracks/13/path = NodePath("Elevator/Water_outline_2:self_modulate:a")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
@@ -673,11 +661,11 @@ tracks/13/keys = {
 tracks/14/type = "value"
 tracks/14/imported = false
 tracks/14/enabled = true
-tracks/14/path = NodePath("Elevator/Water_outline:scale:x")
+tracks/14/path = NodePath("Elevator/Water_outline_2:scale:x")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
-"times": PackedFloat32Array(5.9666667, 6.266667, 6.766667, 8.2, 8.6),
+"times": PackedFloat32Array(5.9666667, 6.3, 6.8, 8.2, 8.6),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
 "values": [0.0, 2.0, 1.2, 1.2, 6.2]
@@ -685,50 +673,64 @@ tracks/14/keys = {
 tracks/15/type = "value"
 tracks/15/imported = false
 tracks/15/enabled = true
-tracks/15/path = NodePath("Elevator/Water_outline_2:self_modulate:a")
+tracks/15/path = NodePath("Elevator/Water_outline:position:x")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
-"times": PackedFloat32Array(5.9333334, 6.133333),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 1.0]
-}
-tracks/16/type = "value"
-tracks/16/imported = false
-tracks/16/enabled = true
-tracks/16/path = NodePath("Elevator/Water_outline_2:scale:x")
-tracks/16/interp = 1
-tracks/16/loop_wrap = true
-tracks/16/keys = {
-"times": PackedFloat32Array(5.9666667, 6.3, 6.8, 8.2, 8.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [0.0, 2.0, 1.2, 1.2, 6.2]
-}
-tracks/17/type = "value"
-tracks/17/imported = false
-tracks/17/enabled = true
-tracks/17/path = NodePath("Elevator/Water_outline:position:x")
-tracks/17/interp = 1
-tracks/17/loop_wrap = true
-tracks/17/keys = {
 "times": PackedFloat32Array(6.266667, 6.8, 8.2, 8.633333),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [-175.0, -155.0, -155.0, -61.0]
 }
-tracks/18/type = "value"
-tracks/18/imported = false
-tracks/18/enabled = true
-tracks/18/path = NodePath("Elevator/Water_outline_2:position:x")
-tracks/18/interp = 1
-tracks/18/loop_wrap = true
-tracks/18/keys = {
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("Elevator/Water_outline_2:position:x")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
 "times": PackedFloat32Array(6.233333, 6.8, 8.2, 8.633333),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [172.0, 152.0, 152.0, 64.0]
+}
+tracks/17/type = "method"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath(".")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(5.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"moving_false"
+}]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("Elevator/Sprite2D2/Door:position")
+tracks/18/interp = 2
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(8.2, 11.033334, 11.233334, 12.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 434), Vector2(0, -23), Vector2(0, -23), Vector2(136, -23)]
+}
+tracks/19/type = "value"
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/path = NodePath("Elevator/Sprite2D/Inside:position:y")
+tracks/19/interp = 2
+tracks/19/loop_wrap = true
+tracks/19/keys = {
+"times": PackedFloat32Array(8.2, 11.033334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [457.0, -8.0]
 }
 
 [sub_resource type="Animation" id="Animation_kdje2"]
@@ -767,7 +769,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [97.094]
+"values": [98.094]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -832,7 +834,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("Elevator/Sprite2D/Body:position:y")
+tracks/8/path = NodePath("Elevator/Sprite2D3/Body:position:y")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -844,7 +846,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("Elevator/Sprite2D/Body/Cog1:rotation")
+tracks/9/path = NodePath("Elevator/Sprite2D/Inside/Cog1:rotation")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -856,7 +858,7 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("Elevator/Sprite2D/Body/Cog2:rotation")
+tracks/10/path = NodePath("Elevator/Sprite2D/Inside/Cog2:rotation")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -868,79 +870,79 @@ tracks/10/keys = {
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("Elevator/Sprite2D/Body/Door:position:x")
+tracks/11/path = NodePath("Elevator/Sprite2D/Inside/Enter_elevator:disabled")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [-1.0]
+"values": [true]
 }
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("Elevator/Sprite2D/Body/Inside/Enter_elevator:disabled")
+tracks/12/path = NodePath("Egg_drop/Container/Sprite2D:position:y")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [0.0]
 }
 tracks/13/type = "value"
 tracks/13/imported = false
 tracks/13/enabled = true
-tracks/13/path = NodePath("Egg_drop/Water_splash:scale")
+tracks/13/path = NodePath("Egg_drop/Container/Sprite2D:visible")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
+"update": 1,
+"values": [true]
 }
 tracks/14/type = "value"
 tracks/14/imported = false
 tracks/14/enabled = true
-tracks/14/path = NodePath("Egg_drop/Sprite2D:position:y")
+tracks/14/path = NodePath("Statue/Left_outline:modulate:a")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0.0]
+"values": [1.0]
 }
 tracks/15/type = "value"
 tracks/15/imported = false
 tracks/15/enabled = true
-tracks/15/path = NodePath("Egg_drop/Water_splash:modulate:a")
+tracks/15/path = NodePath("Statue/Right_outline:modulate:a")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0.0]
+"values": [1.0]
 }
 tracks/16/type = "value"
 tracks/16/imported = false
 tracks/16/enabled = true
-tracks/16/path = NodePath("Egg_drop/Sprite2D:visible")
+tracks/16/path = NodePath("Statue/Line2D:modulate:a")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [1.0]
 }
 tracks/17/type = "value"
 tracks/17/imported = false
 tracks/17/enabled = true
-tracks/17/path = NodePath("Statue/Left_outline:modulate:a")
+tracks/17/path = NodePath("Elevator/Water_outline_2:scale:x")
 tracks/17/interp = 1
 tracks/17/loop_wrap = true
 tracks/17/keys = {
@@ -952,98 +954,86 @@ tracks/17/keys = {
 tracks/18/type = "value"
 tracks/18/imported = false
 tracks/18/enabled = true
-tracks/18/path = NodePath("Statue/Right_outline:modulate:a")
+tracks/18/path = NodePath("Elevator/Water_outline_2:position:x")
 tracks/18/interp = 1
 tracks/18/loop_wrap = true
 tracks/18/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [1.0]
+"values": [155.0]
 }
 tracks/19/type = "value"
 tracks/19/imported = false
 tracks/19/enabled = true
-tracks/19/path = NodePath("Statue/Line2D:modulate:a")
+tracks/19/path = NodePath("Elevator/Water_outline_2:self_modulate:a")
 tracks/19/interp = 1
 tracks/19/loop_wrap = true
 tracks/19/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [1.0]
+"values": [0.0]
 }
 tracks/20/type = "value"
 tracks/20/imported = false
 tracks/20/enabled = true
-tracks/20/path = NodePath("Elevator/Water_outline_2:scale:x")
+tracks/20/path = NodePath("Elevator/Water_outline:self_modulate:a")
 tracks/20/interp = 1
 tracks/20/loop_wrap = true
 tracks/20/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [1.0]
+"values": [0.0]
 }
 tracks/21/type = "value"
 tracks/21/imported = false
 tracks/21/enabled = true
-tracks/21/path = NodePath("Elevator/Water_outline_2:position:x")
+tracks/21/path = NodePath("Elevator/Water_outline:scale:x")
 tracks/21/interp = 1
 tracks/21/loop_wrap = true
 tracks/21/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [155.0]
+"values": [1.0]
 }
 tracks/22/type = "value"
 tracks/22/imported = false
 tracks/22/enabled = true
-tracks/22/path = NodePath("Elevator/Water_outline_2:self_modulate:a")
+tracks/22/path = NodePath("Elevator/Water_outline:position:x")
 tracks/22/interp = 1
 tracks/22/loop_wrap = true
 tracks/22/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [1.0]
+"values": [-155.0]
 }
 tracks/23/type = "value"
 tracks/23/imported = false
 tracks/23/enabled = true
-tracks/23/path = NodePath("Elevator/Water_outline:self_modulate:a")
+tracks/23/path = NodePath("Elevator/Sprite2D2/Door:position")
 tracks/23/interp = 1
 tracks/23/loop_wrap = true
 tracks/23/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1.0]
+"update": 0,
+"values": [Vector2(0, 434)]
 }
 tracks/24/type = "value"
 tracks/24/imported = false
 tracks/24/enabled = true
-tracks/24/path = NodePath("Elevator/Water_outline:scale:x")
+tracks/24/path = NodePath("Elevator/Sprite2D/Inside:position:y")
 tracks/24/interp = 1
 tracks/24/loop_wrap = true
 tracks/24/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [1.0]
-}
-tracks/25/type = "value"
-tracks/25/imported = false
-tracks/25/enabled = true
-tracks/25/path = NodePath("Elevator/Water_outline:position:x")
-tracks/25/interp = 1
-tracks/25/loop_wrap = true
-tracks/25/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [-155.0]
+"values": [444.0]
 }
 
 [sub_resource type="Animation" id="Animation_4uh16"]
@@ -1083,7 +1073,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 3),
 "transitions": PackedFloat32Array(1.3195082, 1.4640847),
 "update": 0,
-"values": [97.094, 46.094]
+"values": [98.094, 46.094]
 }
 
 [sub_resource type="Animation" id="Animation_ucp0a"]
@@ -1136,6 +1126,129 @@ _data = {
 &"Rising_2": SubResource("Animation_ucp0a")
 }
 
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_wkovb"]
+size = Vector2(39, 273)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_noa20"]
+atlas = ExtResource("9_huy5m")
+region = Rect2(174, 141, 87, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_spokt"]
+atlas = ExtResource("9_huy5m")
+region = Rect2(0, 0, 87, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8t230"]
+atlas = ExtResource("9_huy5m")
+region = Rect2(87, 0, 87, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p6mex"]
+atlas = ExtResource("9_huy5m")
+region = Rect2(174, 0, 87, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ielrm"]
+atlas = ExtResource("9_huy5m")
+region = Rect2(261, 0, 87, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5c07n"]
+atlas = ExtResource("9_huy5m")
+region = Rect2(0, 47, 87, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dk8lv"]
+atlas = ExtResource("9_huy5m")
+region = Rect2(87, 47, 87, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4xcm1"]
+atlas = ExtResource("9_huy5m")
+region = Rect2(174, 47, 87, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l4noa"]
+atlas = ExtResource("9_huy5m")
+region = Rect2(261, 47, 87, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hx2ag"]
+atlas = ExtResource("9_huy5m")
+region = Rect2(0, 94, 87, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a6d4o"]
+atlas = ExtResource("9_huy5m")
+region = Rect2(87, 94, 87, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_soo0n"]
+atlas = ExtResource("9_huy5m")
+region = Rect2(174, 94, 87, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xt4jv"]
+atlas = ExtResource("9_huy5m")
+region = Rect2(261, 94, 87, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qk05r"]
+atlas = ExtResource("9_huy5m")
+region = Rect2(0, 141, 87, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0rhqa"]
+atlas = ExtResource("9_huy5m")
+region = Rect2(87, 141, 87, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kio6r"]
+atlas = ExtResource("9_huy5m")
+region = Rect2(261, 141, 87, 47)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ptpgf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_noa20")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_spokt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8t230")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p6mex")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ielrm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5c07n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dk8lv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4xcm1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l4noa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hx2ag")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a6d4o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_soo0n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xt4jv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qk05r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0rhqa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kio6r")
+}],
+"loop": false,
+"name": &"default",
+"speed": 15.0
+}]
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ucp0a"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3pgjm"]
@@ -1159,6 +1272,12 @@ size = Vector2(418, 473)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r3rln"]
 
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_huy5m"]
+size = Vector2(139, 398)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_a7g50"]
+size = Vector2(277, 434)
+
 [node name="Room1" type="Node2D" unique_id=1797998801]
 script = ExtResource("1_minv7")
 
@@ -1177,9 +1296,9 @@ flip_h = true
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Statue/Left_outline" unique_id=1786412923]
 z_index = -1
-position = Vector2(14, 0)
+position = Vector2(8, -6)
 emitting = false
-amount = 2
+amount = 3
 texture = ExtResource("4_kdje2")
 lifetime = 2.0
 process_material = SubResource("ParticleProcessMaterial_o7l06")
@@ -1205,9 +1324,9 @@ offset = Vector2(7, -5)
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Statue/Right_outline" unique_id=946694100]
 z_index = -1
-position = Vector2(-10, 0)
+position = Vector2(-9, -7)
 emitting = false
-amount = 2
+amount = 3
 texture = ExtResource("5_4uh16")
 lifetime = 2.0
 randomness = 0.07
@@ -1232,7 +1351,7 @@ scale = Vector2(1.84375, 3.6562498)
 texture = SubResource("PlaceholderTexture2D_j3utp")
 
 [node name="Sprite2D" type="Sprite2D" parent="Statue/Sprite2D2" unique_id=204304835]
-position = Vector2(-1.627, 97.094)
+position = Vector2(-1.627, 98.094)
 scale = Vector2(0.5423729, 0.2735043)
 texture = ExtResource("2_igrul")
 
@@ -1270,19 +1389,24 @@ default_color = Color(0.6, 0.7490196, 0.6666667, 1)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=918447487]
 libraries/ = SubResource("AnimationLibrary_ucp0a")
+autoplay = &"Elevator_rise"
 
 [node name="Egg_drop" type="Node2D" parent="." unique_id=760724671]
 visible = false
 position = Vector2(-58, -3)
 
-[node name="Sprite2D" type="Sprite2D" parent="Egg_drop" unique_id=1737292319]
+[node name="Container" type="Sprite2D" parent="Egg_drop" unique_id=1942650824]
+clip_children = 1
+position = Vector2(0, 103)
+texture = SubResource("PlaceholderTexture2D_wkovb")
+
+[node name="Sprite2D" type="Sprite2D" parent="Egg_drop/Container" unique_id=1737292319]
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("8_xqepp")
 
-[node name="Water_splash" type="Sprite2D" parent="Egg_drop" unique_id=309085681]
-modulate = Color(1, 1, 1, 0)
+[node name="Water_splash" type="AnimatedSprite2D" parent="Egg_drop" unique_id=2142686306]
 position = Vector2(-0.69444275, 248.2174)
-texture = ExtResource("9_pt40w")
+sprite_frames = SubResource("SpriteFrames_ptpgf")
 offset = Vector2(-1, -19)
 
 [node name="Blood_drop" type="Node2D" parent="." unique_id=1323403682]
@@ -1327,30 +1451,12 @@ position = Vector2(337, 0)
 texture = ExtResource("10_3w57h")
 flip_h = true
 
-[node name="Body" type="Sprite2D" parent="Elevator/Sprite2D" unique_id=1595337437]
-position = Vector2(0, 464)
-texture = ExtResource("11_olvpm")
-
-[node name="Cog1" type="Sprite2D" parent="Elevator/Sprite2D/Body" unique_id=116217641]
+[node name="Inside" type="Sprite2D" parent="Elevator/Sprite2D" unique_id=182916427]
 show_behind_parent = true
-position = Vector2(-120, -210)
-rotation = -0.47922823
-scale = Vector2(0.99999994, 0.99999994)
-texture = ExtResource("12_xqepp")
-
-[node name="Cog2" type="Sprite2D" parent="Elevator/Sprite2D/Body" unique_id=319824841]
-show_behind_parent = true
-position = Vector2(120, -209)
-rotation = -0.25929442
-texture = ExtResource("12_xqepp")
-
-[node name="Inside" type="Sprite2D" parent="Elevator/Sprite2D/Body" unique_id=182916427]
-show_behind_parent = true
-clip_children = 2
-position = Vector2(-1, -8)
+position = Vector2(-1, 444)
 texture = ExtResource("13_pt40w")
 
-[node name="Enter_elevator" type="Button" parent="Elevator/Sprite2D/Body/Inside" unique_id=1642079576]
+[node name="Enter_elevator" type="Button" parent="Elevator/Sprite2D/Inside" unique_id=1642079576]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -1367,16 +1473,46 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_wsvf8")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_r3rln")
 disabled = true
 
-[node name="Door" type="Sprite2D" parent="Elevator/Sprite2D/Body" unique_id=2073885511]
-position = Vector2(-1, -10)
+[node name="Cog1" type="Sprite2D" parent="Elevator/Sprite2D/Inside" unique_id=116217641]
+show_behind_parent = true
+position = Vector2(-119, -202)
+rotation = -0.47922823
+scale = Vector2(0.99999994, 0.99999994)
+texture = ExtResource("12_xqepp")
+
+[node name="Cog2" type="Sprite2D" parent="Elevator/Sprite2D/Inside" unique_id=319824841]
+show_behind_parent = true
+position = Vector2(121, -201)
+rotation = -0.25929442
+texture = ExtResource("12_xqepp")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Elevator" unique_id=1438642114]
+clip_children = 1
+position = Vector2(-0.5000005, 13.499999)
+texture = SubResource("PlaceholderTexture2D_huy5m")
+
+[node name="Door" type="Sprite2D" parent="Elevator/Sprite2D2" unique_id=2073885511]
+show_behind_parent = true
+position = Vector2(0, 434)
 texture = ExtResource("14_huy5m")
 
+[node name="Sprite2D3" type="Sprite2D" parent="Elevator" unique_id=1633883037]
+clip_children = 1
+position = Vector2(0, -4)
+texture = SubResource("PlaceholderTexture2D_a7g50")
+
+[node name="Body" type="Sprite2D" parent="Elevator/Sprite2D3" unique_id=1595337437]
+position = Vector2(0, 464)
+texture = ExtResource("11_olvpm")
+
 [node name="Water_outline" type="Sprite2D" parent="Elevator" unique_id=1087939327]
+self_modulate = Color(1, 1, 1, 0)
 z_index = -1
 position = Vector2(-155, 213)
 texture = ExtResource("18_huy5m")
 
 [node name="Water_outline_2" type="Sprite2D" parent="Elevator" unique_id=1909004503]
+self_modulate = Color(1, 1, 1, 0)
 z_index = -1
 position = Vector2(155, 213)
 texture = ExtResource("18_huy5m")
@@ -1385,8 +1521,20 @@ texture = ExtResource("18_huy5m")
 wait_time = 4.0
 one_shot = true
 
+[node name="Transition" type="ColorRect" parent="." unique_id=706029766]
+z_index = 1
+offset_left = -576.0
+offset_top = -324.0
+offset_right = 576.0
+offset_bottom = 324.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1645810815]
+
 [connection signal="pressed" from="Statue/Sprite2D2/Sprite2D/AnimatedSprite2D/Button" to="." method="_on_button_pressed"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="animation_finished" from="Egg_drop/Water_splash" to="." method="_on_water_splash_animation_finished"]
 [connection signal="pressed" from="DropButton" to="." method="_on_drop_button_pressed"]
-[connection signal="pressed" from="Elevator/Sprite2D/Body/Inside/Enter_elevator" to="." method="_on_enter_elevator_pressed"]
+[connection signal="pressed" from="Elevator/Sprite2D/Inside/Enter_elevator" to="." method="_on_enter_elevator_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

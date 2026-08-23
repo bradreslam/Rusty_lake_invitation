@@ -26,7 +26,7 @@ func _ready():
 		3: slot_4,
 		4: slot_5,
 	}
-	add_item(load("res://Assets/Sprites/blood_drop.png"))
+	add_item(load("res://Assets/Sprites/black_egg.png"))
 
 func _on_left_pressed():
 	move.emit(3)
@@ -65,8 +65,9 @@ func remove_item(item:Texture2D):
 	var index = 0
 	for slot in inventory:
 		if slot == item:
-			slot = null
+			inventory[index] = null
 			inventory_slots[index].texture = null
+			held_item = null
 			return true
 		index += 1
 

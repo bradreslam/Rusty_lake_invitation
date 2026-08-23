@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cl36jeet5tlh7" path="res://Assets/Sprites/tree.png" id="2_anbgc"]
 [ext_resource type="Texture2D" uid="uid://w5j5db0clfle" path="res://Assets/Sprites/odd_tree_1.png" id="4_dlml2"]
 [ext_resource type="Texture2D" uid="uid://dj6whidg5ttib" path="res://Assets/Sprites/odd_tree_2.png" id="5_csljx"]
+[ext_resource type="Texture2D" uid="uid://c1adhya0pqtaw" path="res://Assets/Sprites/tree_crack.png" id="5_wp3fw"]
 [ext_resource type="Texture2D" uid="uid://b8vhf46xblfww" path="res://Assets/Sprites/blood.png" id="6_csljx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wp3fw"]
@@ -360,6 +361,11 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_wp3fw")
 theme_override_styles/disabled = SubResource("StyleBoxTexture_ttqt7")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_infiu")
 
+[node name="Sprite2D" type="Sprite2D" parent="Odd_tree_1" unique_id=199118390]
+position = Vector2(29, 140.99998)
+rotation = 0.047964636
+texture = ExtResource("5_wp3fw")
+
 [node name="Odd_tree_2" type="Sprite2D" parent="." unique_id=981771117]
 position = Vector2(-318, -36)
 texture = ExtResource("5_csljx")
@@ -375,6 +381,10 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_hfkm2")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_gxwhh")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_38okw")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_72hvk")
+
+[node name="Sprite2D" type="Sprite2D" parent="Odd_tree_2" unique_id=2059623143]
+position = Vector2(-4, 128)
+texture = ExtResource("5_wp3fw")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1665752624]
 position = Vector2(1, 1)

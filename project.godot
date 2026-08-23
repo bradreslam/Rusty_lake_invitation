@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Rusty lake inventation"
+config/name="Rusty lake invitation"
 run/main_scene="uid://cyw56yw73wyrl"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="uid://lm7bfhwk15es"

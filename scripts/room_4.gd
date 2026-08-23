@@ -5,6 +5,8 @@ extends Node2D
 @onready var tree = $Tree
 @onready var blood = $Blood_droplet
 @onready var blood_button = $Blood_droplet/Button
+@onready var tree_crack_1 = $Odd_tree_1/Sprite2D
+@onready var tree_crack_2 = $Odd_tree_2/Sprite2D
 
 var tree_1_down = load("res://Assets/Sprites/odd_tree_1_down.png")
 var tree_2_down = load("res://Assets/Sprites/odd_tree_2_down.png")
@@ -19,6 +21,7 @@ signal Open(position:Vector2)
 func on_tree_2_down():
 	odd_tree_2.position = Vector2(-544,133)
 	odd_tree_2.texture = tree_2_down
+	tree_crack_2.visible = false
 	if tree_state == 0:
 		tree.play("Grow1")
 		tree_state = 1
@@ -29,6 +32,7 @@ func on_tree_2_down():
 func on_tree_1_down():
 	odd_tree_1.position = Vector2(182,152)
 	odd_tree_1.texture = tree_1_down
+	tree_crack_1.visible = false
 	if tree_state == 0:
 		tree.play("Grow1")
 		tree_state = 1

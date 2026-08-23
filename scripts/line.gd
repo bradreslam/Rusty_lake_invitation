@@ -32,7 +32,7 @@ func set_formation(): #Sets the priority and openings based on the amount of one
 			priority = 1
 		else:
 			priority = 2
-		direction = Vector2(1,1)
+		direction = Vector2(0,0)
 		return
 	var border_start = check_border(direction * Vector2(-1,-1), colors.front().Id)
 	var border_end = check_border(direction, colors.back().Id)

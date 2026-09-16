@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://ceh4ywg2ojqce" path="res://Assets/Sprites/termite_mandable.png" id="8_la62f"]
 [ext_resource type="Texture2D" uid="uid://c4gt0bip1gsoh" path="res://Assets/Sprites/puzzle_1_particles.png" id="9_om8m0"]
 [ext_resource type="Texture2D" uid="uid://csdhw60fyc8t7" path="res://Assets/Sprites/puzzle_1_line.png" id="10_hs4u7"]
+[ext_resource type="AudioStream" uid="uid://burrf1bdkysge" path="res://Assets/Audio/termite_bite.wav" id="11_rmdj0"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_eqt1q"]
 particles_animation = true
@@ -270,7 +271,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0.2, 0.6333333, 0.99999994),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [0.0, 0.6981317007977318, -0.2373647782712292]
+"values": [0.36826447217080394, -0.5515240436302086, 0.49741883681838395]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -282,7 +283,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0.1, 0.53333336, 0.9),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [0.0, 0.6981317007977318, -0.2373647782712292]
+"values": [0.6981317007977318, 0.0, -0.2373647782712292]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -291,7 +292,7 @@ tracks/4/path = NodePath("RigidBody2D/Sprite2D/Leg3:rotation")
 tracks/4/interp = 2
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.43333334, 0.79999995),
+"times": PackedFloat32Array(0, 0.4, 0.79999995),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [-0.4415683007545656, 0.10995574287564296, -0.2373647782712292]
@@ -306,7 +307,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0.2, 0.6333334, 0.99999994),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [0.0, -0.6981317007977318, 0.2373647782712292]
+"values": [-0.3665191429188092, 0.5410520681182421, -0.49741883681838395]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -318,7 +319,7 @@ tracks/6/keys = {
 "times": PackedFloat32Array(0.1, 0.5333334, 0.9),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [0.0, -0.6981317007977318, 0.2373647782712292]
+"values": [-0.6981317007977318, 0.0, 0.2373647782712292]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
@@ -355,6 +356,23 @@ tracks/9/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0.0, 0.24434609527920617]
+}
+tracks/10/type = "method"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath(".")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 0.56666666),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"play_audio"
+}, {
+"args": [],
+"method": &"play_audio"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_67u8i"]
@@ -470,5 +488,8 @@ texture_mode = 1
 [node name="DespawTimer" type="Timer" parent="." unique_id=274847554]
 wait_time = 1.5
 one_shot = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=206469449]
+stream = ExtResource("11_rmdj0")
 
 [connection signal="timeout" from="DespawTimer" to="." method="_on_despaw_timer_timeout"]

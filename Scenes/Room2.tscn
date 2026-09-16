@@ -4,6 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://n8hsa65otv84" path="res://Assets/Sprites/room2_background.png" id="1_ifjk4"]
 [ext_resource type="Texture2D" uid="uid://cfyrh71bn84ea" path="res://Assets/Sprites/room2_birdcage.png" id="2_tt61t"]
 [ext_resource type="Texture2D" uid="uid://drae5dx3rmj3n" path="res://Assets/Sprites/room2_puzzle.png" id="3_7v5bi"]
+[ext_resource type="Texture2D" uid="uid://bamgpinb07vr1" path="res://Assets/Sprites/shade.png" id="4_erksf"]
+[ext_resource type="AudioStream" uid="uid://bm2ihbsft5b3o" path="res://Assets/Audio/wing.wav" id="6_u5puh"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_erksf"]
 
@@ -14,6 +16,28 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8ll4g"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mdbp1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u5puh"]
+atlas = ExtResource("4_erksf")
+region = Rect2(0, 0, 115, 319)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bbr00"]
+atlas = ExtResource("4_erksf")
+region = Rect2(115, 0, 115, 319)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8ll4g"]
+animations = [{
+"frames": [{
+"duration": 0.7,
+"texture": SubResource("AtlasTexture_u5puh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bbr00")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_we5c8"]
 
@@ -46,6 +70,15 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_bbr00")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_8ll4g")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_mdbp1")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=71241247]
+visible = false
+position = Vector2(26, -16)
+sprite_frames = SubResource("SpriteFrames_8ll4g")
+autoplay = "default"
+frame_progress = 0.1866882
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="AnimatedSprite2D" unique_id=1671677531]
+
 [node name="Puzzle_2" type="Sprite2D" parent="." unique_id=341563802]
 position = Vector2(6, 144)
 texture = ExtResource("3_7v5bi")
@@ -63,6 +96,13 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_vpp8u")
 
 [node name="Parrot_player" type="AudioStreamPlayer2D" parent="." unique_id=812299451]
 position = Vector2(-295, -97)
+stream = ExtResource("6_u5puh")
+
+[node name="Timer" type="Timer" parent="." unique_id=10451663]
+one_shot = true
 
 [connection signal="pressed" from="Bird_cage/Bird_cage_button" to="." method="_on_bird_cage_button_pressed"]
+[connection signal="screen_entered" from="AnimatedSprite2D/VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
 [connection signal="pressed" from="Puzzle_2/Puzzle_2_button" to="." method="_on_puzzle_2_button_pressed"]
+[connection signal="finished" from="Parrot_player" to="." method="_on_parrot_player_finished"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

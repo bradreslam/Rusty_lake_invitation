@@ -444,6 +444,20 @@ tracks/3/keys = {
 "update": 1,
 "values": [true, false]
 }
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0],
+"method": &"play_sound"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_xqepp"]
 resource_name = "Egg_drop"
@@ -486,6 +500,20 @@ tracks/2/keys = {
 "method": &"play"
 }]
 }
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.33333334),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [1],
+"method": &"play_sound"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_a7g50"]
 resource_name = "Elevator_rise"
@@ -506,7 +534,7 @@ tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("Elevator/Sprite2D3/Body:position:y")
-tracks/1/interp = 2
+tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(8.200001, 11.033333),
@@ -701,36 +729,71 @@ tracks/17/path = NodePath(".")
 tracks/17/interp = 1
 tracks/17/loop_wrap = true
 tracks/17/keys = {
-"times": PackedFloat32Array(5.4),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 4.866667, 5.4, 6.133333, 8.566667, 8.766666, 10.933333, 11.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "values": [{
+"args": [2],
+"method": &"play_continued_sound"
+}, {
+"args": [],
+"method": &"stop_looping_sound"
+}, {
 "args": [],
 "method": &"moving_false"
+}, {
+"args": [1],
+"method": &"play_sound"
+}, {
+"args": [6],
+"method": &"play_sound"
+}, {
+"args": [3],
+"method": &"play_continued_sound"
+}, {
+"args": [],
+"method": &"stop_looping_sound"
+}, {
+"args": [4],
+"method": &"play_sound"
 }]
 }
 tracks/18/type = "value"
 tracks/18/imported = false
 tracks/18/enabled = true
 tracks/18/path = NodePath("Elevator/Sprite2D2/Door:position")
-tracks/18/interp = 2
+tracks/18/interp = 1
 tracks/18/loop_wrap = true
 tracks/18/keys = {
 "times": PackedFloat32Array(8.2, 11.033334, 11.233334, 12.9),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(0, 434), Vector2(0, -23), Vector2(0, -23), Vector2(136, -23)]
+"values": [Vector2(0, 443), Vector2(0, -22), Vector2(0, -22), Vector2(136, -23)]
 }
 tracks/19/type = "value"
 tracks/19/imported = false
 tracks/19/enabled = true
 tracks/19/path = NodePath("Elevator/Sprite2D/Inside:position:y")
-tracks/19/interp = 2
+tracks/19/interp = 1
 tracks/19/loop_wrap = true
 tracks/19/keys = {
 "times": PackedFloat32Array(8.2, 11.033334),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [457.0, -8.0]
+}
+tracks/20/type = "method"
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/path = NodePath("Statue/Sprite2D2/Sprite2D/AnimatedSprite2D")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/keys = {
+"times": PackedFloat32Array(1.6333333),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"stop"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_kdje2"]
@@ -1075,6 +1138,23 @@ tracks/2/keys = {
 "update": 0,
 "values": [98.094, 46.094]
 }
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 2.9666667),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [2],
+"method": &"play_continued_sound"
+}, {
+"args": [],
+"method": &"stop_looping_sound"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_ucp0a"]
 resource_name = "Rising_2"
@@ -1114,6 +1194,23 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [2],
+"method": &"play_continued_sound"
+}, {
+"args": [],
+"method": &"stop_looping_sound"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ucp0a"]
@@ -1312,7 +1409,7 @@ collide_with_bodies = false
 
 [node name="Sprite2D" type="Sprite2D" parent="Statue/Left_outline" unique_id=711190780]
 z_index = -1
-position = Vector2(-6, -14)
+position = Vector2(2, -14)
 texture = ExtResource("5_pt40w")
 flip_h = true
 
@@ -1341,7 +1438,7 @@ collide_with_bodies = false
 
 [node name="Sprite2D" type="Sprite2D" parent="Statue/Right_outline" unique_id=1602687922]
 z_index = -1
-position = Vector2(7, -14)
+position = Vector2(-2, -14)
 texture = ExtResource("5_pt40w")
 
 [node name="Sprite2D2" type="Sprite2D" parent="Statue" unique_id=830878065]
@@ -1389,7 +1486,6 @@ default_color = Color(0.6, 0.7490196, 0.6666667, 1)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=918447487]
 libraries/ = SubResource("AnimationLibrary_ucp0a")
-autoplay = &"Elevator_rise"
 
 [node name="Egg_drop" type="Node2D" parent="." unique_id=760724671]
 visible = false
@@ -1521,20 +1617,14 @@ texture = ExtResource("18_huy5m")
 wait_time = 4.0
 one_shot = true
 
-[node name="Transition" type="ColorRect" parent="." unique_id=706029766]
-z_index = 1
-offset_left = -576.0
-offset_top = -324.0
-offset_right = 576.0
-offset_bottom = 324.0
-mouse_filter = 2
-color = Color(0, 0, 0, 0)
-
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1645810815]
+max_polyphony = 5
 
+[connection signal="frame_changed" from="Statue/Sprite2D2/Sprite2D/AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
 [connection signal="pressed" from="Statue/Sprite2D2/Sprite2D/AnimatedSprite2D/Button" to="." method="_on_button_pressed"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="animation_finished" from="Egg_drop/Water_splash" to="." method="_on_water_splash_animation_finished"]
 [connection signal="pressed" from="DropButton" to="." method="_on_drop_button_pressed"]
 [connection signal="pressed" from="Elevator/Sprite2D/Inside/Enter_elevator" to="." method="_on_enter_elevator_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="finished" from="AudioStreamPlayer2D" to="." method="_on_audio_stream_player_2d_finished"]

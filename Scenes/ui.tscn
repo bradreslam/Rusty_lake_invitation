@@ -127,8 +127,19 @@ gradient = SubResource("Gradient_m78vo")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2246s"]
+bg_color = Color(0.0415072, 0.041507192, 0.041507192, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 5.0
+expand_margin_right = 5.0
+expand_margin_bottom = 4.0
+
 [node name="UI" type="CanvasLayer" unique_id=836899672]
 script = ExtResource("1_qdvrb")
+button_group = ExtResource("3_2246s")
 
 [node name="Left" type="Button" parent="." unique_id=1523084643]
 anchors_preset = 4
@@ -419,13 +430,31 @@ grow_vertical = 2
 mouse_filter = 2
 texture = SubResource("GradientTexture2D_smcll")
 
+[node name="Label" type="Label" parent="." unique_id=1372625478]
+modulate = Color(1, 1, 1, 0)
+layout_direction = 3
+offset_left = 921.0
+offset_top = 222.0
+offset_right = 961.0
+offset_bottom = 248.0
+theme_override_colors/font_color = Color(0.8920336, 0.89203364, 0.8920335, 1)
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_2246s")
+text = "black_egg"
+horizontal_alignment = 2
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=713799970]
+z_index = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
 [connection signal="pressed" from="Left" to="." method="_on_left_pressed"]
 [connection signal="pressed" from="Forward" to="." method="_on_forward_pressed"]
 [connection signal="pressed" from="Right" to="." method="_on_right_pressed"]
 [connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
-[connection signal="pressed" from="Inventory/VBoxContainer/Item_slot" to="." method="_on_item_slot_pressed"]
-[connection signal="pressed" from="Inventory/VBoxContainer/Item_slot2" to="." method="_on_item_slot_2_pressed"]
-[connection signal="pressed" from="Inventory/VBoxContainer/Item_slot3" to="." method="_on_item_slot_3_pressed"]
-[connection signal="pressed" from="Inventory/VBoxContainer/Item_slot4" to="." method="_on_item_slot_4_pressed"]
-[connection signal="pressed" from="Inventory/VBoxContainer/Item_slot5" to="." method="_on_item_slot_5_pressed"]
 [connection signal="pressed" from="Inventory/Menu" to="." method="_on_menu_pressed"]

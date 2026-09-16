@@ -7,8 +7,12 @@ extends Node2D
 @onready var room4:Node2D = $Room4
 @onready var cage: = $BirdCage
 @onready var UI:CanvasLayer = $UI
+@onready var audio = $Ambient_sounds
+@onready var timer = $Timer
 
 var menu:PackedScene = preload("res://Scenes/settings.tscn")
+
+var sounds = [load("res://Assets/Audio/wind1.wav"),load("res://Assets/Audio/wind2.wav"),load("res://Assets/Audio/Background_bird.wav")]
 
 var current_room = 1
 var moving = false
@@ -24,6 +28,8 @@ func _ready():
 		3:room3,
 		4:room4
 	}
+	timer.wait_time = randi_range(5,10)
+	timer.start()
 
 func move(direction: bool):
 	if !moving:
@@ -123,3 +129,10 @@ func _on_room_2_open(Position):
 
 func _on_bird_cage_seeds_planted():
 	parrot_check = true
+
+func _on_timer_timeout():
+	audio.stream = sounds.pick_random()
+	audio.pitch_scale = randf_range(0.8,1.2)
+	audio.play()
+	timer.wait_time = randi_range(5,10)
+	timer.start()

@@ -83,5 +83,7 @@ texture = ExtResource("5_wafl1")
 [node name="Timer" type="Timer" parent="." unique_id=1966148097]
 one_shot = true
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1429028969]
+
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://it172y64322o" path="res://scripts/settings.gd" id="1_4geyq"]
 [ext_resource type="Texture2D" uid="uid://bi032io8wgjro" path="res://Assets/Sprites/wallpaper.png" id="2_i44u3"]
+[ext_resource type="AudioStream" uid="uid://8ykuxqi6j3r3" path="res://Assets/Audio/Stone_down.wav" id="3_lhmql"]
 
 [sub_resource type="Gradient" id="Gradient_i44u3"]
 colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0.3764706)
@@ -177,7 +178,12 @@ text = "Sound:"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
-value = 100.0
+min_value = -60.035
+max_value = 0.0
+step = 5.0
+value = -0.03499999999999659
+tick_count = 6
+ticks_on_borders = true
 
 [node name="Close_settings" type="Button" parent="Settings/VBoxContainer" unique_id=432565529]
 layout_mode = 2
@@ -193,6 +199,9 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 texture = SubResource("GradientTexture2D_lhmql")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1582453944]
+stream = ExtResource("3_lhmql")
 
 [connection signal="pressed" from="VBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="VBoxContainer/Return" to="." method="_on_return_pressed"]

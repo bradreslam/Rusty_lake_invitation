@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://yrwti7wqo7a0" path="res://scripts/go_button.gd" id="1_88da2"]
 [ext_resource type="Texture2D" uid="uid://c25nrmetvibc1" path="res://Assets/Sprites/seeds.png" id="2_n47t4"]
+[ext_resource type="AudioStream" uid="uid://8ykuxqi6j3r3" path="res://Assets/Audio/Stone_down.wav" id="3_wf5ei"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4f15b"]
 
@@ -15,11 +16,11 @@
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wf5ei"]
 atlas = ExtResource("2_n47t4")
-region = Rect2(15, 24, 14, 28)
+region = Rect2(20, 33, 16, 29)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_chqx4"]
 atlas = ExtResource("2_n47t4")
-region = Rect2(0, 24, 15, 28)
+region = Rect2(0, 32, 18, 32)
 
 [node name="GoButton" type="Button" unique_id=1035645128]
 custom_minimum_size = Vector2(31, 31)
@@ -47,5 +48,8 @@ grow_vertical = 2
 pivot_offset = Vector2(15, 15)
 mouse_filter = 2
 stretch_mode = 3
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=861044505]
+stream = ExtResource("3_wf5ei")
 
 [connection signal="pressed" from="." to="." method="_on_pressed"]

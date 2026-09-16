@@ -7,6 +7,7 @@ extends Node2D
 @onready var blood_button = $Blood_droplet/Button
 @onready var tree_crack_1 = $Odd_tree_1/Sprite2D
 @onready var tree_crack_2 = $Odd_tree_2/Sprite2D
+@onready var audio = $AudioStreamPlayer2D
 
 var tree_1_down = load("res://Assets/Sprites/odd_tree_1_down.png")
 var tree_2_down = load("res://Assets/Sprites/odd_tree_2_down.png")
@@ -23,9 +24,11 @@ func on_tree_2_down():
 	odd_tree_2.texture = tree_2_down
 	tree_crack_2.visible = false
 	if tree_state == 0:
+		
 		tree.play("Grow1")
 		tree_state = 1
 	elif tree_state == 1:
+		audio.play()
 		tree.play("Grow2")
 		tree_state = 2
 
@@ -34,9 +37,11 @@ func on_tree_1_down():
 	odd_tree_1.texture = tree_1_down
 	tree_crack_1.visible = false
 	if tree_state == 0:
+		audio.play()
 		tree.play("Grow1")
 		tree_state = 1
 	elif tree_state == 1:
+		audio.play()
 		tree.play("Grow2")
 		tree_state = 2
 
@@ -69,7 +74,7 @@ func _on_button_pressed():
 	blood.visible = false
 	blood_button.disabled = true
 	var UI = get_parent().find_child("UI")
-	UI.add_item(load("res://Assets/Sprites/blood_drop.png"))
+	UI.add_item(load("res://Assets/Sprites/blood_drop.png"),"Blood drop")
 
 
 func _on_blood_droplet_animation_finished():

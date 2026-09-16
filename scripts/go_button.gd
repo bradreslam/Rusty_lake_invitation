@@ -1,12 +1,17 @@
 extends Button
 
 @onready var texture = $TextureRect
+@onready var audio = $AudioStreamPlayer2D
 
 @export var white:AtlasTexture
 @export var black:AtlasTexture
 
 var color:int = 0
 var Id:Vector2
+
+func play_audio():
+	audio.pitch_scale = randf_range(0.8,1.2)
+	audio.play()
 
 func init(id):
 	Id = id
@@ -21,6 +26,8 @@ func pressed():
 	tween.parallel().tween_property(texture,"position:y",0.0,0.5)
 	color = 1
 	disabled = true
+	await tween.finished
+	play_audio()
 
 func cappture():
 	if color != 0:
@@ -32,6 +39,8 @@ func cappture():
 	tween.parallel().tween_property(texture,"position:y",0.0,0.5)
 	color = 2
 	disabled = true
+	await tween.finished
+	play_audio()
 
 func release():
 	var tween = create_tween()
@@ -39,3 +48,4 @@ func release():
 	tween.parallel().tween_property(texture,"position:y",-22.0,0.5)
 	color = 0
 	disabled = false
+	await tween.finished

@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dj6whidg5ttib" path="res://Assets/Sprites/odd_tree_2.png" id="5_csljx"]
 [ext_resource type="Texture2D" uid="uid://c1adhya0pqtaw" path="res://Assets/Sprites/tree_crack.png" id="5_wp3fw"]
 [ext_resource type="Texture2D" uid="uid://b8vhf46xblfww" path="res://Assets/Sprites/blood.png" id="6_csljx"]
+[ext_resource type="AudioStream" uid="uid://b2lbpqvqi0exd" path="res://Assets/Audio/creaking.wav" id="8_ttqt7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wp3fw"]
 atlas = ExtResource("2_anbgc")
@@ -406,6 +407,10 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_tcj0b")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_rdgqd")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_p7mla")
 disabled = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1251196375]
+position = Vector2(-56, 147)
+stream = ExtResource("8_ttqt7")
 
 [connection signal="animation_finished" from="Tree" to="." method="_on_tree_animation_finished"]
 [connection signal="pressed" from="Odd_tree_1/tree_1_button" to="." method="_on_tree_1_button_pressed"]

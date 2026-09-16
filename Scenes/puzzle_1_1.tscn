@@ -5,7 +5,9 @@
 [ext_resource type="Texture2D" uid="uid://b6jffjg0js2v5" path="res://Assets/Sprites/puzzle_1_tree_1_bottom.png" id="2_v5idu"]
 [ext_resource type="Texture2D" uid="uid://bow3gy32et5me" path="res://Assets/Sprites/puzzle_1_tree_1_top.png" id="3_x5nyw"]
 [ext_resource type="Script" uid="uid://bhwaii4jhingd" path="res://scripts/Connect_the_dots.gd" id="4_v5idu"]
+[ext_resource type="AudioStream" uid="uid://c1nwqvh4sbin1" path="res://Assets/Audio/Tree_hit_ground.wav" id="6_4nwxw"]
 [ext_resource type="Texture2D" uid="uid://dr6bwd5vaehqu" path="res://Assets/Sprites/puzzle_1_border.png" id="6_o3hqj"]
+[ext_resource type="AudioStream" uid="uid://bb6nh1m654kmp" path="res://Assets/Audio/tree_falling.wav" id="7_msl63"]
 
 [sub_resource type="Animation" id="Animation_g7oda"]
 length = 0.001
@@ -33,10 +35,34 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(-345, -72)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer2D:stream")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("7_msl63")]
+}
 
 [sub_resource type="Animation" id="Animation_v5idu"]
 resource_name = "Tree_falling"
-length = 2.0
+length = 3.8333333
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -44,7 +70,7 @@ tracks/0/path = NodePath("Tree_Bottom/Tree_top:rotation")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.43333334, 1.2),
+"times": PackedFloat32Array(0, 0.53333336, 2.2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [0.0, -0.17570579, -1.6894787159305111]
@@ -56,10 +82,34 @@ tracks/1/path = NodePath("Tree_Bottom/Tree_top:position")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.4, 0.7, 0.8666667, 1.1, 1.2666667, 1.5333333),
+"times": PackedFloat32Array(0, 1.2333333, 1.5333334, 1.7, 2.1, 2.2666667, 2.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(-345, -72), Vector2(-343, -73), Vector2(-343, -74), Vector2(-342.00003, -69), Vector2(-463, 63.00003), Vector2(-527, 239), Vector2(-613, 344)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.06666667, 2.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer2D:stream")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 2.7333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("7_msl63"), ExtResource("6_4nwxw")]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_x5nyw"]
@@ -117,5 +167,8 @@ patch_margin_right = 35
 patch_margin_bottom = 32
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=2025944443]
+stream = ExtResource("7_msl63")
 
 [connection signal="puzzle_finished" from="Puzzle" to="." method="_on_puzzle_puzzle_finished"]

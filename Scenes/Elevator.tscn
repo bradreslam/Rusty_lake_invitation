@@ -1,8 +1,33 @@
 [gd_scene format=3 uid="uid://b5g1sadeaejxn"]
 
+[ext_resource type="Script" uid="uid://c5wx3diwceo5c" path="res://scripts/elevator.gd" id="1_57077"]
 [ext_resource type="Texture2D" uid="uid://yngga4mvgmfo" path="res://Assets/Sprites/elevator_inside_background.png" id="1_dmimb"]
+[ext_resource type="Texture2D" uid="uid://bamgpinb07vr1" path="res://Assets/Sprites/shade.png" id="2_3geoe"]
 [ext_resource type="Texture2D" uid="uid://biiq71b6jc3ug" path="res://Assets/Sprites/elevator_inside_door.png" id="2_xv5vg"]
 [ext_resource type="Texture2D" uid="uid://clx5ftfdygr17" path="res://Assets/Sprites/elevator_inside_foreground.png" id="3_3geoe"]
+[ext_resource type="AudioStream" uid="uid://qxtd51fdav3t" path="res://Assets/Audio/Door_slide.wav" id="4_xv5vg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_57077"]
+atlas = ExtResource("2_3geoe")
+region = Rect2(0, 0, 115, 319)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rd3yl"]
+atlas = ExtResource("2_3geoe")
+region = Rect2(115, 0, 115, 319)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_r4wj7"]
+animations = [{
+"frames": [{
+"duration": 0.7,
+"texture": SubResource("AtlasTexture_57077")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rd3yl")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="Animation" id="Animation_57077"]
 length = 0.001
@@ -42,10 +67,106 @@ tracks/2/keys = {
 "update": 1,
 "values": [1.0]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ColorRect/Label:modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ColorRect/Label:position:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [308.5]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ColorRect/HBoxContainer:modulate:a")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("ColorRect/HBoxContainer:position:y")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [304.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("ColorRect/Label2:modulate:a")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1.0]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("AudioStreamPlayer2D:stream")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("AnimatedSprite2D:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("AnimatedSprite2D:position:y")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [48.000004]
+}
 
 [sub_resource type="Animation" id="Animation_rd3yl"]
 resource_name = "down"
-length = 9.0
+length = 14.7
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -82,6 +203,133 @@ tracks/2/keys = {
 "update": 0,
 "values": [1.0, 0.0, 0.0, 1.0]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ColorRect/Label:modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(9.7, 10.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ColorRect/Label:position:y")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(11.766666, 12.266666),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [308.5, 279.5]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ColorRect/HBoxContainer:modulate:a")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(11.766666, 12.266666),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("ColorRect/HBoxContainer:position:y")
+tracks/6/interp = 2
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(11.766666, 12.266666),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [332.0, 304.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("ColorRect/Label2:modulate:a")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(14.2, 14.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("AudioStreamPlayer2D:stream")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(3.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_xv5vg")]
+}
+tracks/9/type = "method"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("AudioStreamPlayer2D")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(3.2666667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("AnimatedSprite2D:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 4.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("AnimatedSprite2D:position:y")
+tracks/11/interp = 2
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(5.7, 8.166667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [48.000004, -254.0]
+}
+tracks/12/type = "method"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath(".")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(5.733333, 8),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"start_gears"
+}, {
+"args": [],
+"method": &"start_fade"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_r4wj7"]
 _data = {
@@ -90,6 +338,7 @@ _data = {
 }
 
 [node name="Elevator" type="Node2D" unique_id=1520086]
+script = ExtResource("1_57077")
 
 [node name="background" type="Sprite2D" parent="." unique_id=1797141945]
 position = Vector2(-126, 99)
@@ -101,6 +350,14 @@ offset_top = 360.0
 offset_right = 165.0
 offset_bottom = 606.0
 color = Color(0, 0, 0, 1)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=266138344]
+visible = false
+position = Vector2(-130, 48.000004)
+scale = Vector2(1.2891304, 1.2891304)
+sprite_frames = SubResource("SpriteFrames_r4wj7")
+autoplay = "default"
+frame_progress = 0.1621812
 
 [node name="door" type="Sprite2D" parent="." unique_id=1138476361]
 position = Vector2(-490, 30)
@@ -119,8 +376,66 @@ offset_right = 575.0
 offset_bottom = 324.0
 color = Color(0, 0, 0, 1)
 
+[node name="Label" type="Label" parent="ColorRect" unique_id=635685244]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -198.5
+offset_top = -15.5
+offset_right = 198.5
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 22
+text = "Hi people of Rusty Lake."
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="Label" parent="ColorRect" unique_id=560322920]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -234.5
+offset_top = -20.0
+offset_right = 234.5
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 22
+text = "I hope you enjoyed this small game I made."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="ColorRect" unique_id=621503645]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -239.5
+offset_top = 12.5
+offset_right = 239.5
+offset_bottom = 43.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 22
+text = "If you did I would love to come over and have a chat."
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=148524189]
 libraries/ = SubResource("AnimationLibrary_r4wj7")
 autoplay = &"down"
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=957564681]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1814409130]
+
+[connection signal="finished" from="AudioStreamPlayer2D" to="." method="_on_audio_stream_player_2d_finished"]

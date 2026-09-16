@@ -3,10 +3,15 @@ extends CanvasLayer
 @onready var quit_check = $Check
 @onready var settings = $Settings
 @onready var window_button = $Settings/VBoxContainer/HBoxContainer2/Window_mode
+@onready var audio = $AudioStreamPlayer2D
+@onready var volume_slider = $Settings/VBoxContainer/HBoxContainer/Volume
 
 var quiting:bool = false
 
 var window = 0
+
+func _ready():
+	volume_slider.value = AudioServer.get_bus_volume_db(0)
 
 func _input(event):
 	if event.is_action_pressed("Settings"):
@@ -61,4 +66,5 @@ func _on_close_settings_pressed():
 	settings.visible = false
 
 func _on_volume_value_changed(value):
+	audio.play()
 	AudioServer.set_bus_volume_db(0,value)

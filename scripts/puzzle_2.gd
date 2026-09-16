@@ -4,6 +4,7 @@ extends Node2D
 @onready var button_sprite = $Button/Sprite2D
 @onready var seeds_button = $Button
 @onready var timer = $Timer
+@onready var audio_player = $AudioStreamPlayer2D
 
 var button = preload("res://Assets/Components/Go_button.tscn")
 
@@ -14,6 +15,13 @@ var lines = []
 var player_turn = true
 
 var winning_line = null
+
+var pick_up_seeds
+var win_game
+
+func play_audio(sound):
+	audio_player.stream = sound
+	audio_player.play()
 
 func _ready():
 	var x = 1
@@ -57,11 +65,28 @@ func Respond(): #Picks a line based on priority
 			count += 1
 		Place_at_line(lines[randi_range(0,count-1)])
 	else:
+		if lines[0].priority == 1:
+			if randi_range(0,1) == 1:
+				place_stone_at_random()
+				return
 		var duplicated_lines = []
 		for line in lines:
 			for n in line.priority:
 				duplicated_lines.append(line)
+		if duplicated_lines.size() == 0:
+			place_stone_at_random()
+			return
 		Place_at_line(duplicated_lines[randi_range(0,duplicated_lines.size()-1)])
+
+func place_stone_at_random():
+	while true:
+		var y = randi_range(3,17)
+		var x = randi_range(3,17)
+		if buttons[Vector2(x,y)].color == 0:
+			buttons[Vector2(x,y)].cappture()
+			check_line(Vector2(x,y))
+			player_turn = true
+			break
 
 func Place_at_line(Line): #places a stone at a position based on a line
 	var placed_button
@@ -75,14 +100,8 @@ func Place_at_line(Line): #places a stone at a position based on a line
 					check_line(stone + new_dir)
 					player_turn = true
 					return
-			while true:
-				var y = randi_range(3,17)
-				var x = randi_range(3,17)
-				if buttons[Vector2(x,y)].color == 0:
-					buttons[Vector2(x,y)].cappture()
-					check_line(Vector2(x,y))
-					player_turn = true
-					return
+			place_stone_at_random()
+			return
 	if Line.openings == 0:
 		if randi() % 2:
 			placed_button = buttons[Line.colors[0].Id + Line.direction * Vector2(-1,-1)]
@@ -307,7 +326,6 @@ func check_line(id:Vector2): #Checks if a line is created or changed
 		line.set_formation()
 	
 	lines.append_array(new_lines)
-	print(lines.size())
 
 func check_if_lines_contain_button(lines_to_check,butt):
 	for line in lines_to_check:
@@ -319,8 +337,9 @@ func check_surounding_cells(id):
 	var directions = [Vector2(1,1),Vector2(1,0),Vector2(1,-1),Vector2(0,1),
 	Vector2(0,-1),Vector2(-1,1),Vector2(-1,0),Vector2(-1,-1)]
 	for dir in directions:
-		if buttons[id+dir].color != 0:
-			return true
+		if check_if_id_on_board(id+dir):
+			if buttons[id+dir].color != 0:
+				return true
 	return false
 
 func reset_game():
@@ -334,8 +353,10 @@ func reset_game():
 	timer.start()
 
 func game_won():
+	get_parent().find_child("Room2").view_shade()
 	timer.queue_free()
 	var tween = create_tween()
+	play_audio(win_game)
 	for butt in buttons:
 		var button_inst = buttons[butt]
 		button_inst.disabled = true
@@ -350,7 +371,8 @@ func game_won():
 func _on_button_pressed():
 	seeds_button.disabled = true
 	var UI = get_parent().find_child("UI")
-	UI.add_item(load("res://Assets/Sprites/bird_seeds_pile.png"))
+	UI.add_item(load("res://Assets/Sprites/bird_seeds_pile.png"),"Bird seeds")
+	play_audio(pick_up_seeds)
 	var tween = create_tween()
 	tween.tween_property(button_sprite,"modulate:a",0,0.5)
 	await tween.finished

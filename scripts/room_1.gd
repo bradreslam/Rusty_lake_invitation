@@ -13,12 +13,34 @@ extends Node2D
 @onready var line = $Statue/Line2D
 @onready var timer = $Timer
 @onready var drop_button = $DropButton
-@onready var transition = $Transition
 @onready var audio = $AudioStreamPlayer2D
+
+var sounds = [load("res://Assets/Audio/water_drop.wav"),load("res://Assets/Audio/Water_emerge_small.wav"),
+load("res://Assets/Audio/stone_rumble.wav"),load("res://Assets/Audio/gear_click.wav"),
+load("res://Assets/Audio/Door_slide.wav"),load("res://Assets/Audio/bell.wav"),load("res://Assets/Audio/Water_emerge.wav")]
+var water_drop
+var water_splash
+
+var looping_sound_id
+var looping_sound = false
 
 var statue_position
 var moving = false
 var statue_state = 0
+
+func stop_looping_sound():
+	audio.stop()
+	looping_sound = false
+
+func play_sound(sound:int):
+	audio.stream = sounds[sound]
+	audio.play()
+
+func play_continued_sound(sound:int):
+	looping_sound = true
+	audio.stream = sounds[sound]
+	looping_sound_id = sound
+	audio.play()
 
 func _on_button_pressed():
 	bell.play("Ring")
@@ -70,6 +92,9 @@ func _on_drop_button_pressed():
 			animation.play("Egg_drop")
 
 func _on_timer_timeout():
+	if looping_sound == true:
+		looping_sound = false
+		return
 	moving = true
 	animation.play("Elevator_rise")
 
@@ -77,12 +102,19 @@ func moving_false():
 	moving = false
 
 func _on_enter_elevator_pressed():
-	var main = get_parent()
-	main.still = true
-	var tween = create_tween()
-	tween.tween_property(transition,"color:a",1,1)
-	await tween.finished
-	get_tree().change_scene_to_file("res://Scenes/Elevator.tscn")
+	var UI = get_parent().find_child("UI")
+	UI.enter_elevator()
 
 func _on_water_splash_animation_finished():
 	move_statue()
+
+
+func _on_audio_stream_player_2d_finished():
+	if looping_sound:
+		audio.stream = sounds[looping_sound_id]
+		audio.play()
+
+
+func _on_animated_sprite_2d_frame_changed():
+	if bell.frame == 10 || bell.frame == 34:
+		play_sound(5)

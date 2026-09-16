@@ -41,6 +41,11 @@ position = Vector2(1662, 1170)
 [node name="BirdCage" parent="." unique_id=1857703332 instance=ExtResource("10_hptm8")]
 position = Vector2(1660, -1265)
 
+[node name="Ambient_sounds" type="AudioStreamPlayer2D" parent="." unique_id=1237819454]
+max_polyphony = 2
+
+[node name="Timer" type="Timer" parent="." unique_id=1464905917]
+
 [connection signal="Open" from="Room2" to="." method="_on_room_2_open"]
 [connection signal="Open" from="Room4" to="." method="_on_room_4_open"]
 [connection signal="move" from="UI" to="." method="_on_ui_move"]
@@ -48,3 +53,4 @@ position = Vector2(1660, -1265)
 [connection signal="puzzle_1_1_finished" from="Puzzle_1_1" to="Room4" method="_on_puzzle_1_1_puzzle_1_1_finished"]
 [connection signal="puzzle_1_2_finished" from="Puzzle1_2" to="Room4" method="_on_puzzle_1_2_puzzle_1_2_finished"]
 [connection signal="seeds_planted" from="BirdCage" to="." method="_on_bird_cage_seeds_planted"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

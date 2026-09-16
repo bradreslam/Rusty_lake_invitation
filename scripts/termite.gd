@@ -6,10 +6,15 @@ extends Node2D
 @onready var particles = $RigidBody2D/Sprite2D/GPUParticles2D
 @onready var physics = $RigidBody2D
 @onready var timer = $DespawTimer
+@onready var audio = $AudioStreamPlayer2D
 
 signal termite_finished
 
 var color
+
+func play_audio():
+	audio.pitch_scale = randf_range(0.8,1.2)
+	audio.play()
 
 func _ready():
 	sprite.self_modulate = color

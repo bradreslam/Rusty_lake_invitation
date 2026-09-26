@@ -104,11 +104,11 @@ func Place_at_line(Line): #places a stone at a position based on a line
 			return
 	if Line.openings == 0:
 		if randi() % 2:
-			placed_button = buttons[Line.colors[0].Id + Line.direction * Vector2(-1,-1)]
+			placed_button = buttons[Line.colors[0].Id - Line.direction]
 		else:
 			placed_button = buttons[Line.colors.back().Id + Line.direction]
 	elif Line.openings == 1:
-		placed_button = buttons[Line.colors[0].Id + Line.direction * Vector2(-1,-1)]
+		placed_button = buttons[Line.colors[0].Id - Line.direction]
 	else:
 		placed_button = buttons[Line.colors.back().Id + Line.direction]
 	
@@ -139,7 +139,7 @@ func compare_arrays(Array_to_check, Array_to_match):#Check if array_to_check con
 	return null
 
 func check_for_broken_winning_lines(new_line,line):
-	var front_id = new_line.colors[0].Id + (new_line.direction * Vector2(-1,-1)) *2
+	var front_id = new_line.colors[0].Id - new_line.direction *2
 	var back_id = new_line.colors.back().Id + new_line.direction * 2
 	if !check_if_id_on_board(front_id) || !check_if_id_on_board(back_id):
 		return
@@ -195,39 +195,18 @@ func check_if_id_on_board(id:Vector2):
 		return true
 	return false
 
-func check_line(id:Vector2): #Checks if a line is created or changed
-	var directions_to_check = [Vector2(0,1),Vector2(-1,1),Vector2(-1,0),Vector2(-1,-1)
-	,Vector2(0,-1),Vector2(1,-1),Vector2(1,0),Vector2(1,1)]
-	var new_lines = []
-	var lines_to_remove = []
-	var lines_to_add = []
-	for dir in directions_to_check:
-		if buttons.get(id+dir, button.instantiate()).color != 0:
-			var line = Line_data.new()
-			if buttons[id].color != 0:
-				line.colors.append(buttons[id])
-				for l in new_lines:
-					if l.direction + dir == Vector2.ZERO:
-						new_lines.erase(l)
-						line = l
-						line.colors.reverse()
-						break
-			line.direction = dir
-			var i = 1
-			while check_if_id_on_board(id+dir*i) && buttons[id+dir*i].color != 0:
-				line.colors.append(buttons[id+dir*i])
-				i += 1
-			new_lines.append(line)
-	
-	
-	if new_lines.size() == 0: # if the placed stone is on its own set custom values
+func check_if_line_1_long(new_lines, id):
+	if new_lines.size() == 0:
 		var line = Line_data.new()
 		line.colors.append(buttons[id])
 		line.set_formation()
 		lines.append(line)
-		return
-	
-	for l in new_lines: #check if new lines intersect with existing lines
+		return true
+	return false
+
+func check_if_new_lines_extend_excisting_lines(new_lines):
+	var lines_to_remove = []
+	for l in new_lines:
 		for line in lines:
 			if line.direction == l.direction || line.direction == l.direction * Vector2(-1,-1) || line.direction == Vector2(0,0):
 				if line.colors.has(l.colors[0]) || line.colors.has(l.colors.back()):
@@ -237,6 +216,51 @@ func check_line(id:Vector2): #Checks if a line is created or changed
 		for line in lines_to_remove:
 			lines.erase(line)
 		lines_to_remove.clear()
+
+func check_if_line_contains_old_line(line):
+	var lines_to_remove = []
+	for l in lines:
+		if l.colors.size() == 1:
+			if l.colors[0] in line.colors:
+				lines_to_remove.append(l)
+		else:
+			if l.colors[0] in line.colors && l.colors[1] in line.colors:
+				lines_to_remove.append(l)
+			elif l.colors[l.colors.size()-1] in line.colors && l.colors[l.colors.size()-2] in line.colors:
+				lines_to_remove.append(l)
+	
+	for l in lines_to_remove:
+		lines.erase(l)
+
+func check_line(id:Vector2): #Checks if a line is created or changed
+	var directions_to_check = [Vector2(0,1),Vector2(-1,1),Vector2(-1,0),Vector2(-1,-1)]
+	var new_lines = []
+	var lines_to_remove = []
+	var lines_to_add = []
+	for dir:Vector2 in directions_to_check:
+		var line = Line_data.new()
+		line.colors.append(buttons[id])
+		var i = 1
+		while check_if_id_on_board(id+dir*i) && buttons[id+dir*i].color != 0:
+			line.colors.append(buttons[id+dir*i])
+			i += 1
+		dir.y = dir.y * -1
+		dir.x = dir.x * -1
+		i = 1
+		line.colors.reverse()
+		while check_if_id_on_board(id+dir*i) && buttons[id+dir*i].color != 0:
+			line.colors.append(buttons[id+dir*i])
+			i += 1
+		line.direction = dir
+		if line.colors.size() > 1:
+			new_lines.append(line)
+	
+	
+	if check_if_line_1_long(new_lines,id):
+		return
+	
+	for line in new_lines:
+		check_if_line_contains_old_line(line)
 	
 	for l in new_lines:#checks if the game is won, or if stones are captured
 		if !lines_to_remove.has(l):

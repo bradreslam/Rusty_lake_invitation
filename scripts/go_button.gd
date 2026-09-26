@@ -30,9 +30,6 @@ func pressed():
 	play_audio()
 
 func cappture():
-	if color != 0:
-		print(Id)
-		return false
 	texture.texture = black
 	var tween = create_tween()
 	tween.tween_property(texture,"modulate:a",1, 0.5)

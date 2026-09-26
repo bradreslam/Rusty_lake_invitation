@@ -20,6 +20,10 @@ config/icon="uid://lm7bfhwk15es"
 window/size/mode=3
 window/stretch/mode="canvas_items"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/gdUnit4/plugin.cfg")
+
 [input]
 
 left={

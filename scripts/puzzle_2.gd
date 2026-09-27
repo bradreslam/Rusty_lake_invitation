@@ -204,19 +204,6 @@ func check_if_line_1_long(new_lines, id):
 		return true
 	return false
 
-func check_if_new_lines_extend_excisting_lines(new_lines):
-	var lines_to_remove = []
-	for l in new_lines:
-		for line in lines:
-			if line.direction == l.direction || line.direction == l.direction * Vector2(-1,-1) || line.direction == Vector2(0,0):
-				if line.colors.has(l.colors[0]) || line.colors.has(l.colors.back()):
-					lines_to_remove.append(line)
-				else:
-					check_for_broken_winning_lines(l,line)
-		for line in lines_to_remove:
-			lines.erase(line)
-		lines_to_remove.clear()
-
 func check_if_line_contains_old_line(line):
 	var lines_to_remove = []
 	for l in lines:
@@ -232,11 +219,128 @@ func check_if_line_contains_old_line(line):
 	for l in lines_to_remove:
 		lines.erase(l)
 
+func is_zero(number):
+	if number.color == 0:
+		return true
+	return false
+
+func remove_one_zero_from_line(line):
+	var color_list = line.colors
+	var split_point = color_list.find_custom(is_zero.bind())
+	var new_lines = []
+	var line_1 = Line_data.new()
+	var line_2 = Line_data.new()
+	
+	var i = 0
+	while i < split_point:
+		line_1.colors.append(color_list[i])
+		i += 1
+	i += 1
+	while i < color_list.size():
+		line_2.colors.append(color_list[i])
+		i += 1
+		
+	if line_1.colors.size() == 1:
+		new_lines.append(line_1)
+	elif line_1.colors.size() > 1:
+		line_1.direction = line.direction
+		new_lines.append(line_1)
+	
+	if line_2.colors.size() == 1:
+		new_lines.append(line_2)
+	elif line_2.colors.size() > 1:
+		line_2.direction = line.direction
+		new_lines.append(line_2)
+	
+	return new_lines
+
+func check_line_size(line, dir, new_lines, removed_lines, lines_to_add):
+	if line.colors.size() > 1:
+		line.direction = dir
+		return line
+	elif line.colors.size() == 1:
+		var unique = true
+		for l in lines:
+			if !removed_lines.has(l):
+				for col in l.colors:
+					if col == line.colors[0]:
+						unique = false
+		if unique:
+			for l in new_lines:
+				if !removed_lines.has(l):
+					for col in l.colors:
+						if col == line.colors[0]:
+							unique = false
+		if unique:
+			for l in lines_to_add:
+				if !removed_lines.has(l):
+					for col in l.colors:
+						if col == line.colors[0]:
+							unique = false
+		if unique:
+			return line
+
+func remove_0_from_every_line(new_lines):
+	var lines_to_remove = []
+	var lines_to_add = []
+	
+	for line in new_lines:
+		var color_list = line.colors
+		if color_list.any(func(col): return col.color == 0):
+			lines_to_remove.append(line)
+			if color_list.reduce(func(count, next): return count + 1 if is_zero(next) else count, 0) > 1:
+				var line_1 = Line_data.new()
+				var line_2 = Line_data.new()
+				
+				var i = 0
+				while color_list[i].color != 0:
+					line_1.colors.append(color_list[i])
+					i += 1
+				while color_list[i].color == 0:
+					i += 1
+				while i < color_list.size():
+					line_2.colors.append(color_list[i])
+					i += 1
+				
+				var n_line = check_line_size(line_1,line.direction, new_lines, lines_to_remove, lines_to_add)
+				if n_line != null:
+					lines_to_add.append(n_line)
+				n_line = check_line_size(line_2,line.direction, new_lines, lines_to_remove, lines_to_add)
+				if n_line != null:
+					lines_to_add.append(n_line)
+			else:
+				var seperated_lines = remove_one_zero_from_line(line)
+				for l in seperated_lines:
+					var n_line = check_line_size(l,line.direction, new_lines, lines_to_remove, lines_to_add)
+					if n_line != null:
+						lines_to_add.append(n_line)
+	
+	for line in lines_to_remove:
+		new_lines.erase(line)
+	
+	lines_to_remove.clear()
+	
+	for line in lines:
+		if line.colors.any(func(col): return col.color == 0):
+			lines_to_remove.append(line)
+			var seperated_lines = remove_one_zero_from_line(line)
+			for l in seperated_lines:
+				var n_line = check_line_size(l,line.direction, new_lines, lines_to_remove, lines_to_add)
+				if n_line != null:
+					lines_to_add.append(n_line)
+	
+	for line in lines_to_remove:
+		lines.erase(line)
+	
+	for line in lines_to_add:
+		if line != null:
+			new_lines.append(line)
+	
+	return new_lines
+
 func check_line(id:Vector2): #Checks if a line is created or changed
 	var directions_to_check = [Vector2(0,1),Vector2(-1,1),Vector2(-1,0),Vector2(-1,-1)]
 	var new_lines = []
-	var lines_to_remove = []
-	var lines_to_add = []
 	for dir:Vector2 in directions_to_check:
 		var line = Line_data.new()
 		line.colors.append(buttons[id])
@@ -262,89 +366,28 @@ func check_line(id:Vector2): #Checks if a line is created or changed
 	for line in new_lines:
 		check_if_line_contains_old_line(line)
 	
+	var stones_removed = false
+	
 	for l in new_lines:#checks if the game is won, or if stones are captured
-		if !lines_to_remove.has(l):
-			if l.colors.size() > 3:
-				var hit = compare_arrays(l.colors,[1,2,2,1])
-				if hit == null:
-					hit = compare_arrays(l.colors,[2,1,1,2])
-				if hit != null:
-					lines_to_remove.append(l)
-					l.colors[hit+1].release()
-					l.colors[hit+2].release()
-					var lines_to_check = []
-					
-					for line in lines:
-						if line.colors.any(func(col): return col.color == 0):
-							lines_to_check.append(line)
-					
-					for line in lines_to_check:
-						lines.erase(line)
-					
-					for line in new_lines:
-						if line != l:
-							if line.colors.any(func(col): return col.color == 0):
-								lines_to_check.append(line)
-								lines_to_remove.append(line)
-					
-					for line in lines_to_check: # checks if an already existing line contains one of the hit stones
-						var new_line = Line_data.new()
-						while line.colors[0].color != 0:
-							new_line.colors.append(line.colors[0])
-							line.colors.pop_front()
-						line.colors.pop_front()
-						if new_line.colors.size() == 1:
-							if !check_surounding_cells(new_line.colors[0].Id):
-								lines_to_add.append(new_line)
-						elif new_line.colors.size() != 0:
-							new_line.direction = line.direction
-							lines_to_add.append(new_line)
-						if line.colors.size() == 1:
-							if !check_surounding_cells(line.colors[0].Id):
-								lines_to_add.append(line)
-						elif line.colors.size() != 0:
-							lines_to_add.append(line)
-					
-					
-					var new_line_1 = Line_data.new()
-					if hit == 0:
-						if check_surounding_cells(l.colors[0].Id):
-							new_line_1.colors.append(l.colors[0])
-					else:
-						var i = 0
-						new_line_1.direction = l.direction
-						while i <= hit:
-							new_line_1.colors.append(l.colors[i])
-							i += 1
-					var new_line_2 = Line_data.new()
-					if hit == l.colors.size()-4:
-						if check_surounding_cells(l.colors.back().Id):
-							new_line_2.colors.append(l.colors.back())
-					else:
-						var i = hit+3
-						new_line_2.direction = l.direction
-						while i < l.colors.size():
-							new_line_2.colors.append(l.colors[i])
-							i += 1
-					if new_line_1.colors.size() != 0:
-						lines_to_add.append(new_line_1)
-					if new_line_2.colors.size() != 0:
-						lines_to_add.append(new_line_2)
-					
-				elif l.colors.size() > 4:
-					if compare_arrays(l.colors,[1,1,1,1,1]) != null:
-						game_won()
-						return
-					elif compare_arrays(l.colors,[2,2,2,2,2]) != null:
-						winning_line = l
-						reset_game()
-						return
+		if l.colors.size() > 3:
+			if compare_arrays(l.colors,[1,1,1,1,1]) != null:
+				game_won()
+				return
+			elif compare_arrays(l.colors,[2,2,2,2,2]) != null:
+				winning_line = l
+				reset_game()
+				return
+			
+			var hit = compare_arrays(l.colors,[1,2,2,1])
+			if hit == null:
+				hit = compare_arrays(l.colors,[2,1,1,2])
+			if hit != null:
+				stones_removed = true
+				l.colors[hit+1].release()
+				l.colors[hit+2].release()
 	
-	for line in lines_to_remove:
-		new_lines.erase(line)
-	
-	for line in lines_to_add:
-		new_lines.append(line)
+	if stones_removed:
+		new_lines = remove_0_from_every_line(new_lines)
 	
 	for line in new_lines:
 		line.set_formation()
